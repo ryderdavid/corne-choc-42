@@ -3,28 +3,44 @@
   "uid": -1,
   "layout": [
     [
-      ["KC_TAB", "KC_B", "KC_L", "KC_D", "KC_C", "KC_V", "KC_J", "KC_Y", "KC_O", "KC_U", "KC_COMMA", "KC_BSPACE"],
-      ["KC_ESCAPE", "LSFT_T(KC_N)", "LCTL_T(KC_R)", "LALT_T(KC_T)", "LGUI_T(KC_S)", "KC_G", "RGUI_T(KC_P)", "KC_H", "RALT_T(KC_A)", "RCTL_T(KC_E)", "RSFT_T(KC_I)", "KC_SCOLON"],
-      ["KC_LSHIFT", "KC_Q", "KC_X", "KC_M", "KC_W", "KC_Z", "KC_K", "KC_F", "KC_QUOTE", "KC_SLASH", "KC_DOT", "KC_RSHIFT"],
-      ["KC_LALT", "KC_LGUI", "LT(1, KC_SPACE)", "LT(2, KC_ENTER)", "KC_RGUI", "KC_RALT"]
+      ["KC_TAB", "KC_B", "KC_L", "KC_D", "KC_C", "KC_V"],
+      ["KC_ESCAPE", "LSFT_T(KC_N)", "LCTL_T(KC_R)", "LALT_T(KC_T)", "LGUI_T(KC_S)", "KC_G"],
+      ["KC_LSHIFT", "KC_Q", "KC_X", "KC_M", "KC_W", "KC_Z"],
+      [-1, -1, -1, "KC_LALT", "KC_LGUI", "LT(1, KC_SPACE)"],
+      ["KC_BSPACE", "KC_COMMA", "KC_U", "KC_O", "KC_Y", "KC_J"],
+      ["KC_SCOLON", "RSFT_T(KC_I)", "RCTL_T(KC_E)", "RALT_T(KC_A)", "KC_H", "RGUI_T(KC_P)"],
+      ["KC_RSHIFT", "KC_DOT", "KC_SLASH", "KC_QUOTE", "KC_F", "KC_K"],
+      [-1, -1, -1, "KC_RALT", "KC_RGUI", "LT(2, KC_ENTER)"]
     ],
     [
-      ["KC_GRAVE", "KC_1", "KC_2", "KC_3", "KC_4", "KC_5", "KC_6", "KC_7", "KC_8", "KC_9", "KC_0", "KC_DELETE"],
-      ["KC_TILDE", "KC_EXCLAIM", "KC_AT", "KC_HASH", "KC_DOLLAR", "KC_PERCENT", "KC_CIRCUMFLEX", "KC_AMPERSAND", "KC_ASTERISK", "KC_LEFT_PAREN", "KC_RIGHT_PAREN", "KC_PIPE"],
-      ["KC_TRNS", "KC_F1", "KC_F2", "KC_F3", "KC_F4", "KC_F5", "KC_F6", "KC_F7", "KC_F8", "KC_F9", "KC_F10", "KC_TRNS"],
-      ["KC_TRNS", "KC_TRNS", "KC_TRNS", "MO(3)", "KC_F11", "KC_F12"]
+      ["KC_GRAVE", "KC_1", "KC_2", "KC_3", "KC_4", "KC_5"],
+      ["KC_TILDE", "KC_EXCLAIM", "KC_AT", "KC_HASH", "KC_DOLLAR", "KC_PERCENT"],
+      ["KC_TRNS", "KC_F1", "KC_F2", "KC_F3", "KC_F4", "KC_F5"],
+      [-1, -1, -1, "KC_TRNS", "KC_TRNS", "KC_TRNS"],
+      ["KC_DELETE", "KC_0", "KC_9", "KC_8", "KC_7", "KC_6"],
+      ["KC_PIPE", "KC_RIGHT_PAREN", "KC_LEFT_PAREN", "KC_ASTERISK", "KC_AMPERSAND", "KC_CIRCUMFLEX"],
+      ["KC_TRNS", "KC_F10", "KC_F9", "KC_F8", "KC_F7", "KC_F6"],
+      [-1, -1, -1, "KC_F12", "KC_F11", "MO(3)"]
     ],
     [
-      ["KC_TRNS", "LGUI(KC_Z)", "LGUI(KC_X)", "LGUI(KC_C)", "LGUI(KC_V)", "KC_NO", "KC_PGUP", "KC_HOME", "KC_UP", "KC_END", "KC_NO", "KC_DELETE"],
-      ["KC_TRNS", "KC_LSHIFT", "KC_LCTRL", "KC_LALT", "KC_LGUI", "KC_NO", "KC_PGDOWN", "KC_LEFT", "KC_DOWN", "KC_RIGHT", "KC_NO", "KC_NO"],
-      ["KC_TRNS", "KC_AUDIO_VOL_DOWN", "KC_AUDIO_VOL_UP", "KC_AUDIO_MUTE", "KC_MEDIA_PLAY_PAUSE", "KC_NO", "KC_NO", "KC_MINUS", "KC_EQUAL", "KC_LBRACKET", "KC_RBRACKET", "KC_BSLASH"],
-      ["KC_TRNS", "KC_TRNS", "MO(3)", "KC_TRNS", "KC_TRNS", "KC_TRNS"]
+      ["KC_TRNS", "LGUI(KC_Z)", "LGUI(KC_X)", "LGUI(KC_C)", "LGUI(KC_V)", "KC_NO"],
+      ["KC_TRNS", "KC_LSHIFT", "KC_LCTRL", "KC_LALT", "KC_LGUI", "KC_NO"],
+      ["KC_TRNS", "KC_AUDIO_VOL_DOWN", "KC_AUDIO_VOL_UP", "KC_AUDIO_MUTE", "KC_MEDIA_PLAY_PAUSE", "KC_NO"],
+      [-1, -1, -1, "KC_TRNS", "KC_TRNS", "MO(3)"],
+      ["KC_DELETE", "KC_NO", "KC_END", "KC_UP", "KC_HOME", "KC_PGUP"],
+      ["KC_NO", "KC_NO", "KC_RIGHT", "KC_DOWN", "KC_LEFT", "KC_PGDOWN"],
+      ["KC_BSLASH", "KC_RBRACKET", "KC_LBRACKET", "KC_EQUAL", "KC_MINUS", "KC_NO"],
+      [-1, -1, -1, "KC_TRNS", "KC_TRNS", "KC_TRNS"]
     ],
     [
-      ["QK_BOOTLOADER", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "QK_BOOTLOADER"],
-      ["KC_NO", "KC_BRIGHTNESS_DOWN", "KC_BRIGHTNESS_UP", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO"],
-      ["CW_TOGG", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO"],
-      ["KC_TRNS", "KC_TRNS", "KC_TRNS", "KC_TRNS", "KC_TRNS", "KC_TRNS"]
+      ["QK_BOOTLOADER", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO"],
+      ["KC_NO", "KC_BRIGHTNESS_DOWN", "KC_BRIGHTNESS_UP", "KC_NO", "KC_NO", "KC_NO"],
+      ["CW_TOGG", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO"],
+      [-1, -1, -1, "KC_TRNS", "KC_TRNS", "KC_TRNS"],
+      ["QK_BOOTLOADER", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO"],
+      ["KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_NO"],
+      [-1, -1, -1, "KC_TRNS", "KC_TRNS", "KC_TRNS"]
     ]
   ],
   "encoder_layout": [[], [], [], []],
