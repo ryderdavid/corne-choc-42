@@ -101,23 +101,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐
-    // │ Adjust — Symbols (activated by Lower + Raise)                       │
+    // │ Adjust — System (activated by Lower + Raise)                        │
     // └──────────────────────────────────────────────────────────────────────┘
     //
     // ,--------------------------------------------.  ,--------------------------------------------.
-    // |  ,   |  <   |  >   |  -   |      |  |     |  |  ^   |  {   |  }   |  $   |      |  →     |
+    // | Boot |      |      |      |      |        |  |      |      |      |      |      | Boot   |
     // |------+------+------+------+------+---------|  |------+------+------+------+------+---------|
-    // |  !   |  *   |  /   |  =   |      |  &     |  |  #   |  (   |  )   |  ;   |      |  "     |
+    // |      | BRI- | BRI+ |      |      |        |  |      |      |      |      |      |        |
     // |------+------+------+------+------+---------|  |------+------+------+------+------+---------|
-    // |  ~   |  +   |  [   |  ]   |      |  %     |  |  @   |  :   |  `   |  .   |      |  '     |
+    // | CWrd |      |      |      |      |        |  |      |      |      |      |      |        |
     // `------+------+------+------+------+---------'  `---------+------+------+------+------+------'
     //                      |      |      |      |      |      |      |      |
     //                      `--------------------'      `--------------------'
 
     [_ADJUST] = LAYOUT_split_3x6_3(
-        KC_COMM, KC_LABK, KC_RABK, KC_MINS, KC_TRNS, KC_PIPE,      KC_CIRC, KC_LCBR, KC_RCBR, KC_DLR,  KC_TRNS, KC_RGHT,
-        KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_TRNS, KC_AMPR,      KC_HASH, KC_LPRN, KC_RPRN, KC_SCLN, KC_TRNS, KC_DQUO,
-        KC_TILD, KC_PLUS, KC_LBRC, KC_RBRC, KC_TRNS, KC_PERC,      KC_AT,   KC_COLN, KC_GRV,  KC_DOT,  KC_TRNS, KC_QUOT,
+        QK_BOOT, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   QK_BOOT,
+        KC_NO,   KC_BRID, KC_BRIU, KC_NO,   KC_NO,   KC_NO,        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        CW_TOGG, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
                                     KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS
     ),
 };
