@@ -105,19 +105,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // └──────────────────────────────────────────────────────────────────────┘
     //
     // ,--------------------------------------------.  ,--------------------------------------------.
-    // |  ,   |  <   |  >   |  -   |      |  |     |  |  ^   |  {   |  }   |  $   |      |  →     |
+    // |      |  !   |  @   |  #   |  $   |  %     |  |  <   |  {   |  [   |  -   |  →   |        |
     // |------+------+------+------+------+---------|  |------+------+------+------+------+---------|
-    // |  !   |  *   |  /   |  =   |      |  &     |  |  #   |  (   |  )   |  ;   |      |  "     |
+    // |      |  ^   |  &   |  *   |  (   |  )     |  |  >   |  }   |  ]   |  =   |  |   |        |
     // |------+------+------+------+------+---------|  |------+------+------+------+------+---------|
-    // |  ~   |  +   |  [   |  ]   |      |  %     |  |  @   |  :   |  `   |  .   |      |  '     |
+    // |      |  ~   |  `   |  .   |  ,   |  /     |  |  +   |  :   |  ;   |  "   |  '   |        |
     // `------+------+------+------+------+---------'  `---------+------+------+------+------+------'
     //                      |      |      |      |      |      |      |      |
     //                      `--------------------'      `--------------------'
 
     [_ADJUST] = LAYOUT_split_3x6_3(
-        KC_COMM, KC_LABK, KC_RABK, KC_MINS, KC_TRNS, KC_PIPE,      KC_CIRC, KC_LCBR, KC_RCBR, KC_DLR,  KC_TRNS, KC_RGHT,
-        KC_EXLM, KC_ASTR, KC_SLSH, KC_EQL,  KC_TRNS, KC_AMPR,      KC_HASH, KC_LPRN, KC_RPRN, KC_SCLN, KC_TRNS, KC_DQUO,
-        KC_TILD, KC_PLUS, KC_LBRC, KC_RBRC, KC_TRNS, KC_PERC,      KC_AT,   KC_COLN, KC_GRV,  KC_DOT,  KC_TRNS, KC_QUOT,
+        KC_TRNS, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_LABK, KC_LCBR, KC_LBRC, KC_MINS, KC_RGHT, KC_TRNS,
+        KC_TRNS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,      KC_RABK, KC_RCBR, KC_RBRC, KC_EQL,  KC_PIPE, KC_TRNS,
+        KC_TRNS, KC_TILD, KC_GRV,  KC_DOT,  KC_COMM, KC_SLSH,      KC_PLUS, KC_COLN, KC_SCLN, KC_DQUO, KC_QUOT, KC_TRNS,
                                     KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS
     ),
 };
