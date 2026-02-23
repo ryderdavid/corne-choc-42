@@ -53,8 +53,9 @@ enum layers {
 
 // ─── Thumb Keys ─────────────────────────────────────────────────────────────
 
+#define NAV_ENT LT(_NAV, KC_ENT)
 #define NAV_SPC LT(_NAV, KC_SPC)
-#define SYM_ENT LT(_SYMBOLS, KC_ENT)
+#define SYM_BSP LT(_SYMBOLS, KC_BSPC)
 #define SYM_SPC LT(_SYMBOLS, KC_SPC)
 
 // ─── Tap Dance ──────────────────────────────────────────────────────────────
@@ -206,7 +207,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
         MO(_NAV),   HM_A,    HM_S,    HM_D,    HM_F,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_H), HM_J, HM_K, HM_L, HM_SCLN, KC_QUOT,
         KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,              KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_SLSH),
-                                       KC_LGUI, KC_BSPC, SYM_ENT,           SYM_SPC, NAV_SPC, RGUI_T(KC_ENT)
+                                       KC_LGUI, SYM_BSP, NAV_ENT,           NAV_SPC, SYM_SPC, RGUI_T(KC_ENT)
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐

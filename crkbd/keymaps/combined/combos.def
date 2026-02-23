@@ -10,7 +10,7 @@
 //   Gallium Q→Z, X→X, M→C, W→V, Z→B | K→N, F→M, '→,  /→.  .→/
 
 // Space thumb key used as combo differentiator
-// In the combined layout: SYM_SPC = LT(_NUMBERS, KC_SPC)
+// In the combined layout: NAV_SPC = LT(_NUMBERS, KC_SPC)
 
 // ─── Utility Combos (always active — same physical keys for both layouts) ────
 
@@ -28,112 +28,112 @@ const uint16_t PROGMEM cmb_num_tg[] = {LT(_NUMBERS, KC_G), LT(_NUMBERS, KC_H), C
 // ─── QWERTY Word Chords ────────────────────────────────────────────────────
 // These use QWERTY keycodes directly (layer 0 keycodes)
 
-const uint16_t PROGMEM qwc_the[]   = {KC_T, KC_H, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_be[]    = {KC_B, KC_E, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_to[]    = {KC_T, KC_O, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_and[]   = {HM_A, KC_N, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_of[]    = {KC_O, HM_F, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_in[]    = {KC_I, KC_N, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_have[]  = {KC_H, KC_V, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_that[]  = {KC_T, KC_H, HM_A, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_for[]   = {HM_F, KC_R, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_not[]   = {KC_N, KC_T, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_with[]  = {KC_W, KC_I, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_you[]   = {KC_Y, KC_O, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_this[]  = {KC_T, KC_I, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_from[]  = {HM_F, KC_R, KC_O, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_but[]   = {KC_B, KC_U, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_what[]  = {KC_W, HM_A, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_it[]    = {KC_I, KC_T, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_he[]    = {KC_H, KC_E, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_on[]    = {KC_O, KC_N, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_are[]   = {HM_A, KC_R, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_do[]    = {HM_D, KC_O, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_his[]   = {KC_H, KC_I, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_by[]    = {KC_B, KC_Y, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_they[]  = {KC_T, KC_Y, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_her[]   = {KC_H, KC_R, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_or[]    = {KC_O, KC_R, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_at[]    = {HM_A, KC_T, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_one[]   = {KC_O, KC_E, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_had[]   = {KC_H, HM_D, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_say[]   = {HM_S, KC_Y, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_she[]   = {HM_S, KC_H, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_all[]   = {HM_A, HM_L, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_which[] = {KC_W, KC_H, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_will[]  = {KC_W, HM_L, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_would[] = {KC_W, HM_D, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_there[] = {KC_T, KC_R, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_their[] = {KC_T, KC_E, KC_I, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_my[]    = {KC_M, KC_Y, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_out[]   = {KC_O, KC_U, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_up[]    = {KC_U, KC_P, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_about[] = {HM_A, KC_B, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_who[]   = {KC_W, KC_O, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_get[]   = {LT(_NUMBERS,KC_G), KC_E, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_make[]  = {KC_M, HM_K, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_go[]    = {LT(_NUMBERS,KC_G), KC_O, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_like[]  = {HM_L, HM_K, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_just[]  = {HM_J, KC_U, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_know[]  = {HM_K, KC_N, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_take[]  = {KC_T, HM_K, SYM_SPC, COMBO_END};
-const uint16_t PROGMEM qwc_come[]  = {KC_C, KC_M, SYM_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_the[]   = {KC_T, KC_H, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_be[]    = {KC_B, KC_E, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_to[]    = {KC_T, KC_O, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_and[]   = {HM_A, KC_N, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_of[]    = {KC_O, HM_F, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_in[]    = {KC_I, KC_N, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_have[]  = {KC_H, KC_V, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_that[]  = {KC_T, KC_H, HM_A, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_for[]   = {HM_F, KC_R, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_not[]   = {KC_N, KC_T, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_with[]  = {KC_W, KC_I, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_you[]   = {KC_Y, KC_O, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_this[]  = {KC_T, KC_I, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_from[]  = {HM_F, KC_R, KC_O, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_but[]   = {KC_B, KC_U, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_what[]  = {KC_W, HM_A, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_it[]    = {KC_I, KC_T, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_he[]    = {KC_H, KC_E, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_on[]    = {KC_O, KC_N, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_are[]   = {HM_A, KC_R, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_do[]    = {HM_D, KC_O, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_his[]   = {KC_H, KC_I, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_by[]    = {KC_B, KC_Y, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_they[]  = {KC_T, KC_Y, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_her[]   = {KC_H, KC_R, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_or[]    = {KC_O, KC_R, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_at[]    = {HM_A, KC_T, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_one[]   = {KC_O, KC_E, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_had[]   = {KC_H, HM_D, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_say[]   = {HM_S, KC_Y, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_she[]   = {HM_S, KC_H, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_all[]   = {HM_A, HM_L, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_which[] = {KC_W, KC_H, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_will[]  = {KC_W, HM_L, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_would[] = {KC_W, HM_D, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_there[] = {KC_T, KC_R, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_their[] = {KC_T, KC_E, KC_I, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_my[]    = {KC_M, KC_Y, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_out[]   = {KC_O, KC_U, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_up[]    = {KC_U, KC_P, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_about[] = {HM_A, KC_B, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_who[]   = {KC_W, KC_O, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_get[]   = {LT(_NUMBERS,KC_G), KC_E, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_make[]  = {KC_M, HM_K, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_go[]    = {LT(_NUMBERS,KC_G), KC_O, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_like[]  = {HM_L, HM_K, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_just[]  = {HM_J, KC_U, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_know[]  = {HM_K, KC_N, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_take[]  = {KC_T, HM_K, NAV_SPC, COMBO_END};
+const uint16_t PROGMEM qwc_come[]  = {KC_C, KC_M, NAV_SPC, COMBO_END};
 
 // ─── Gallium Word Chords ────────────────────────────────────────────────────
 // These use QWERTY keycodes at the physical positions where Gallium has the letters.
 // Example: Gallium "T" is at QWERTY "D" position → use HM_D (LALT_T(KC_D))
 //          Gallium "H" is at QWERTY "J" position → use HM_J (RGUI_T(KC_J))
 
-const uint16_t PROGMEM gwc_the[]   = {HM_D, HM_J, SYM_SPC, COMBO_END};        // T(=D)+H(=J)
-const uint16_t PROGMEM gwc_be[]    = {KC_Q, HM_L, SYM_SPC, COMBO_END};        // B(=Q)+E(=L)
-const uint16_t PROGMEM gwc_to[]    = {HM_D, KC_I, SYM_SPC, COMBO_END};        // T(=D)+O(=I)
-const uint16_t PROGMEM gwc_and[]   = {HM_K, HM_A, SYM_SPC, COMBO_END};       // A(=K)+N(=A)
-const uint16_t PROGMEM gwc_of[]    = {KC_I, KC_M, SYM_SPC, COMBO_END};        // O(=I)+F(=M)
-const uint16_t PROGMEM gwc_in[]    = {HM_SCLN, HM_A, SYM_SPC, COMBO_END};    // I(=;)+N(=A)
-const uint16_t PROGMEM gwc_have[]  = {HM_J, KC_T, SYM_SPC, COMBO_END};       // H(=J)+V(=T)
-const uint16_t PROGMEM gwc_that[]  = {HM_D, HM_J, HM_K, SYM_SPC, COMBO_END}; // T(=D)+H(=J)+A(=K)
-const uint16_t PROGMEM gwc_for[]   = {KC_M, HM_S, SYM_SPC, COMBO_END};       // F(=M)+R(=S)
-const uint16_t PROGMEM gwc_not[]   = {HM_A, HM_D, SYM_SPC, COMBO_END};       // N(=A)+T(=D)
-const uint16_t PROGMEM gwc_with[]  = {KC_V, HM_SCLN, SYM_SPC, COMBO_END};    // W(=V)+I(=;)
-const uint16_t PROGMEM gwc_you[]   = {KC_U, KC_I, SYM_SPC, COMBO_END};       // Y(=U)+O(=I)
-const uint16_t PROGMEM gwc_this[]  = {HM_D, HM_SCLN, SYM_SPC, COMBO_END};    // T(=D)+I(=;)
-const uint16_t PROGMEM gwc_from[]  = {KC_M, HM_S, KC_I, SYM_SPC, COMBO_END}; // F(=M)+R(=S)+O(=I)
-const uint16_t PROGMEM gwc_but[]   = {KC_Q, KC_O, SYM_SPC, COMBO_END};       // B(=Q)+U(=O)
-const uint16_t PROGMEM gwc_what[]  = {KC_V, HM_K, SYM_SPC, COMBO_END};       // W(=V)+A(=K)
-const uint16_t PROGMEM gwc_it[]    = {HM_SCLN, HM_D, SYM_SPC, COMBO_END};    // I(=;)+T(=D)
-const uint16_t PROGMEM gwc_he[]    = {HM_J, HM_L, SYM_SPC, COMBO_END};       // H(=J)+E(=L)
-const uint16_t PROGMEM gwc_on[]    = {KC_I, HM_A, SYM_SPC, COMBO_END};       // O(=I)+N(=A)
-const uint16_t PROGMEM gwc_are[]   = {HM_K, HM_S, SYM_SPC, COMBO_END};       // A(=K)+R(=S)
-const uint16_t PROGMEM gwc_do[]    = {KC_E, KC_I, SYM_SPC, COMBO_END};       // D(=E)+O(=I)
-const uint16_t PROGMEM gwc_his[]   = {HM_J, HM_SCLN, SYM_SPC, COMBO_END};    // H(=J)+I(=;)
-const uint16_t PROGMEM gwc_by[]    = {KC_Q, KC_U, SYM_SPC, COMBO_END};       // B(=Q)+Y(=U)
-const uint16_t PROGMEM gwc_they[]  = {HM_D, KC_U, SYM_SPC, COMBO_END};       // T(=D)+Y(=U)
-const uint16_t PROGMEM gwc_her[]   = {HM_J, HM_S, SYM_SPC, COMBO_END};       // H(=J)+R(=S)
-const uint16_t PROGMEM gwc_or[]    = {KC_I, HM_S, SYM_SPC, COMBO_END};       // O(=I)+R(=S)
-const uint16_t PROGMEM gwc_at[]    = {HM_K, HM_D, SYM_SPC, COMBO_END};       // A(=K)+T(=D)
-const uint16_t PROGMEM gwc_one[]   = {KC_I, HM_L, SYM_SPC, COMBO_END};       // O(=I)+E(=L)
-const uint16_t PROGMEM gwc_had[]   = {HM_J, KC_E, SYM_SPC, COMBO_END};       // H(=J)+D(=E)
-const uint16_t PROGMEM gwc_say[]   = {HM_F, KC_U, SYM_SPC, COMBO_END};       // S(=F)+Y(=U)
-const uint16_t PROGMEM gwc_she[]   = {HM_F, HM_J, SYM_SPC, COMBO_END};       // S(=F)+H(=J)
-const uint16_t PROGMEM gwc_all[]   = {HM_K, KC_W, SYM_SPC, COMBO_END};       // A(=K)+L(=W)
-const uint16_t PROGMEM gwc_which[] = {KC_V, HM_J, SYM_SPC, COMBO_END};       // W(=V)+H(=J)
-const uint16_t PROGMEM gwc_will[]  = {KC_V, KC_W, SYM_SPC, COMBO_END};       // W(=V)+L(=W)
-const uint16_t PROGMEM gwc_would[] = {KC_V, KC_E, SYM_SPC, COMBO_END};       // W(=V)+D(=E)
-const uint16_t PROGMEM gwc_there[] = {HM_D, HM_S, SYM_SPC, COMBO_END};       // T(=D)+R(=S)
-const uint16_t PROGMEM gwc_their[] = {HM_D, HM_L, HM_SCLN, SYM_SPC, COMBO_END}; // T(=D)+E(=L)+I(=;)
-const uint16_t PROGMEM gwc_my[]    = {KC_C, KC_U, SYM_SPC, COMBO_END};       // M(=C)+Y(=U)
-const uint16_t PROGMEM gwc_out[]   = {KC_I, KC_O, SYM_SPC, COMBO_END};       // O(=I)+U(=O)
-const uint16_t PROGMEM gwc_up[]    = {KC_O, KC_H, SYM_SPC, COMBO_END};       // U(=O)+P(=H)
-const uint16_t PROGMEM gwc_about[] = {HM_K, KC_Q, SYM_SPC, COMBO_END};       // A(=K)+B(=Q)
-const uint16_t PROGMEM gwc_who[]   = {KC_V, KC_I, SYM_SPC, COMBO_END};       // W(=V)+O(=I)
-const uint16_t PROGMEM gwc_get[]   = {LT(_NUMBERS,KC_G), HM_L, SYM_SPC, COMBO_END}; // G(=G)+E(=L)
-const uint16_t PROGMEM gwc_make[]  = {KC_C, KC_N, SYM_SPC, COMBO_END};              // M(=C)+K(=N)
-const uint16_t PROGMEM gwc_go[]    = {LT(_NUMBERS,KC_G), KC_I, SYM_SPC, COMBO_END}; // G(=G)+O(=I)
-const uint16_t PROGMEM gwc_like[]  = {KC_W, KC_N, SYM_SPC, COMBO_END};       // L(=W)+K(=N)
-const uint16_t PROGMEM gwc_just[]  = {KC_Y, KC_O, SYM_SPC, COMBO_END};       // J(=Y)+U(=O)
-const uint16_t PROGMEM gwc_know[]  = {KC_N, HM_A, SYM_SPC, COMBO_END};       // K(=N)+N(=A)
-const uint16_t PROGMEM gwc_take[]  = {HM_D, KC_N, SYM_SPC, COMBO_END};       // T(=D)+K(=N)
-const uint16_t PROGMEM gwc_come[]  = {KC_R, KC_C, SYM_SPC, COMBO_END};       // C(=R)+M(=C)
+const uint16_t PROGMEM gwc_the[]   = {HM_D, HM_J, NAV_SPC, COMBO_END};        // T(=D)+H(=J)
+const uint16_t PROGMEM gwc_be[]    = {KC_Q, HM_L, NAV_SPC, COMBO_END};        // B(=Q)+E(=L)
+const uint16_t PROGMEM gwc_to[]    = {HM_D, KC_I, NAV_SPC, COMBO_END};        // T(=D)+O(=I)
+const uint16_t PROGMEM gwc_and[]   = {HM_K, HM_A, NAV_SPC, COMBO_END};       // A(=K)+N(=A)
+const uint16_t PROGMEM gwc_of[]    = {KC_I, KC_M, NAV_SPC, COMBO_END};        // O(=I)+F(=M)
+const uint16_t PROGMEM gwc_in[]    = {HM_SCLN, HM_A, NAV_SPC, COMBO_END};    // I(=;)+N(=A)
+const uint16_t PROGMEM gwc_have[]  = {HM_J, KC_T, NAV_SPC, COMBO_END};       // H(=J)+V(=T)
+const uint16_t PROGMEM gwc_that[]  = {HM_D, HM_J, HM_K, NAV_SPC, COMBO_END}; // T(=D)+H(=J)+A(=K)
+const uint16_t PROGMEM gwc_for[]   = {KC_M, HM_S, NAV_SPC, COMBO_END};       // F(=M)+R(=S)
+const uint16_t PROGMEM gwc_not[]   = {HM_A, HM_D, NAV_SPC, COMBO_END};       // N(=A)+T(=D)
+const uint16_t PROGMEM gwc_with[]  = {KC_V, HM_SCLN, NAV_SPC, COMBO_END};    // W(=V)+I(=;)
+const uint16_t PROGMEM gwc_you[]   = {KC_U, KC_I, NAV_SPC, COMBO_END};       // Y(=U)+O(=I)
+const uint16_t PROGMEM gwc_this[]  = {HM_D, HM_SCLN, NAV_SPC, COMBO_END};    // T(=D)+I(=;)
+const uint16_t PROGMEM gwc_from[]  = {KC_M, HM_S, KC_I, NAV_SPC, COMBO_END}; // F(=M)+R(=S)+O(=I)
+const uint16_t PROGMEM gwc_but[]   = {KC_Q, KC_O, NAV_SPC, COMBO_END};       // B(=Q)+U(=O)
+const uint16_t PROGMEM gwc_what[]  = {KC_V, HM_K, NAV_SPC, COMBO_END};       // W(=V)+A(=K)
+const uint16_t PROGMEM gwc_it[]    = {HM_SCLN, HM_D, NAV_SPC, COMBO_END};    // I(=;)+T(=D)
+const uint16_t PROGMEM gwc_he[]    = {HM_J, HM_L, NAV_SPC, COMBO_END};       // H(=J)+E(=L)
+const uint16_t PROGMEM gwc_on[]    = {KC_I, HM_A, NAV_SPC, COMBO_END};       // O(=I)+N(=A)
+const uint16_t PROGMEM gwc_are[]   = {HM_K, HM_S, NAV_SPC, COMBO_END};       // A(=K)+R(=S)
+const uint16_t PROGMEM gwc_do[]    = {KC_E, KC_I, NAV_SPC, COMBO_END};       // D(=E)+O(=I)
+const uint16_t PROGMEM gwc_his[]   = {HM_J, HM_SCLN, NAV_SPC, COMBO_END};    // H(=J)+I(=;)
+const uint16_t PROGMEM gwc_by[]    = {KC_Q, KC_U, NAV_SPC, COMBO_END};       // B(=Q)+Y(=U)
+const uint16_t PROGMEM gwc_they[]  = {HM_D, KC_U, NAV_SPC, COMBO_END};       // T(=D)+Y(=U)
+const uint16_t PROGMEM gwc_her[]   = {HM_J, HM_S, NAV_SPC, COMBO_END};       // H(=J)+R(=S)
+const uint16_t PROGMEM gwc_or[]    = {KC_I, HM_S, NAV_SPC, COMBO_END};       // O(=I)+R(=S)
+const uint16_t PROGMEM gwc_at[]    = {HM_K, HM_D, NAV_SPC, COMBO_END};       // A(=K)+T(=D)
+const uint16_t PROGMEM gwc_one[]   = {KC_I, HM_L, NAV_SPC, COMBO_END};       // O(=I)+E(=L)
+const uint16_t PROGMEM gwc_had[]   = {HM_J, KC_E, NAV_SPC, COMBO_END};       // H(=J)+D(=E)
+const uint16_t PROGMEM gwc_say[]   = {HM_F, KC_U, NAV_SPC, COMBO_END};       // S(=F)+Y(=U)
+const uint16_t PROGMEM gwc_she[]   = {HM_F, HM_J, NAV_SPC, COMBO_END};       // S(=F)+H(=J)
+const uint16_t PROGMEM gwc_all[]   = {HM_K, KC_W, NAV_SPC, COMBO_END};       // A(=K)+L(=W)
+const uint16_t PROGMEM gwc_which[] = {KC_V, HM_J, NAV_SPC, COMBO_END};       // W(=V)+H(=J)
+const uint16_t PROGMEM gwc_will[]  = {KC_V, KC_W, NAV_SPC, COMBO_END};       // W(=V)+L(=W)
+const uint16_t PROGMEM gwc_would[] = {KC_V, KC_E, NAV_SPC, COMBO_END};       // W(=V)+D(=E)
+const uint16_t PROGMEM gwc_there[] = {HM_D, HM_S, NAV_SPC, COMBO_END};       // T(=D)+R(=S)
+const uint16_t PROGMEM gwc_their[] = {HM_D, HM_L, HM_SCLN, NAV_SPC, COMBO_END}; // T(=D)+E(=L)+I(=;)
+const uint16_t PROGMEM gwc_my[]    = {KC_C, KC_U, NAV_SPC, COMBO_END};       // M(=C)+Y(=U)
+const uint16_t PROGMEM gwc_out[]   = {KC_I, KC_O, NAV_SPC, COMBO_END};       // O(=I)+U(=O)
+const uint16_t PROGMEM gwc_up[]    = {KC_O, KC_H, NAV_SPC, COMBO_END};       // U(=O)+P(=H)
+const uint16_t PROGMEM gwc_about[] = {HM_K, KC_Q, NAV_SPC, COMBO_END};       // A(=K)+B(=Q)
+const uint16_t PROGMEM gwc_who[]   = {KC_V, KC_I, NAV_SPC, COMBO_END};       // W(=V)+O(=I)
+const uint16_t PROGMEM gwc_get[]   = {LT(_NUMBERS,KC_G), HM_L, NAV_SPC, COMBO_END}; // G(=G)+E(=L)
+const uint16_t PROGMEM gwc_make[]  = {KC_C, KC_N, NAV_SPC, COMBO_END};              // M(=C)+K(=N)
+const uint16_t PROGMEM gwc_go[]    = {LT(_NUMBERS,KC_G), KC_I, NAV_SPC, COMBO_END}; // G(=G)+O(=I)
+const uint16_t PROGMEM gwc_like[]  = {KC_W, KC_N, NAV_SPC, COMBO_END};       // L(=W)+K(=N)
+const uint16_t PROGMEM gwc_just[]  = {KC_Y, KC_O, NAV_SPC, COMBO_END};       // J(=Y)+U(=O)
+const uint16_t PROGMEM gwc_know[]  = {KC_N, HM_A, NAV_SPC, COMBO_END};       // K(=N)+N(=A)
+const uint16_t PROGMEM gwc_take[]  = {HM_D, KC_N, NAV_SPC, COMBO_END};       // T(=D)+K(=N)
+const uint16_t PROGMEM gwc_come[]  = {KC_R, KC_C, NAV_SPC, COMBO_END};       // C(=R)+M(=C)
 
 // ─── Combo Array ────────────────────────────────────────────────────────────
 
