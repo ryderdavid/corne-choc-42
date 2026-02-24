@@ -1,0 +1,45 @@
+# Adjacent key map for Corne Choc column-stagger with MBK keycaps (QWERTY)
+#
+# Format: intended_letter -> letters you might accidentally hit
+#
+# Column stagger means vertical neighbors are offset slightly,
+# and wide MBK caps increase lateral overlap. On a Corne 3x6:
+#
+#   Q W E R T   Y U I O P
+#   A S D F G   H J K L ;
+#   Z X C V B   N M , . /
+#
+# Each entry accounts for: same-row neighbors, column neighbors
+# (above/below with stagger offset), and diagonal fat-fingers.
+
+# Top row
+q -> wa
+w -> qeas
+e -> wrd
+r -> etf
+t -> ryg
+y -> tuh
+u -> yij
+i -> uok
+o -> ipl
+p -> o
+
+# Home row
+a -> qszw
+s -> awdxe
+d -> secfx
+f -> drgvc
+g -> fthvb
+h -> gynjb
+j -> hukm
+k -> jil
+l -> ko
+
+# Bottom row
+z -> xa
+x -> zcs
+c -> xdvs
+v -> cfbg
+b -> vgnh
+n -> bmhj
+m -> njk

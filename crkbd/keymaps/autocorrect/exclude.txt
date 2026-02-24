@@ -1,0 +1,7 @@
+# do not match typos to these words
+rpi
+*ball
+*tersm*
+*toin
+monr*
+pont

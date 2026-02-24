@@ -1,5 +1,5 @@
-// Corne Choc 42-Key — Gallium Profile
-// qmk flash -kb crkbd/rev1 -km gallium -e CONVERT_TO=rp2040_ce
+// Corne Choc 42-Key — QWERTY Windows Profile
+// qmk flash -kb crkbd/rev1 -km qwerty-win -e CONVERT_TO=rp2040_ce
 
 #pragma once
 

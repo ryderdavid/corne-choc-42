@@ -1,5 +1,5 @@
-// Corne Choc 42-Key — Gallium v1 Profile
-// macOS-optimized with SCAG home row mods + word chording + enhanced OLED
+// Corne Choc 42-Key — Gallium v1 Profile (Windows Mode)
+// Windows-optimized with SGAC home row mods + word chording + enhanced OLED
 //
 // Gallium v1 alpha layout:
 //   b l d c v   j y o u ,
@@ -25,18 +25,18 @@ enum layers {
     _FKEYS,
 };
 
-// ─── Home Row Mods — SCAG (Shift-Ctrl-Alt/Opt-Gui/Cmd) ─────────────────────
+// ─── Home Row Mods — SGAC (Shift-Gui/Win-Alt-Ctrl) ──────────────────────────
 
 // Left hand (Gallium home row: N R T S G)
 #define HM_N    LSFT_T(KC_N)
-#define HM_R    LCTL_T(KC_R)
+#define HM_R    LGUI_T(KC_R)
 #define HM_T    LALT_T(KC_T)
-#define HM_S    LGUI_T(KC_S)
+#define HM_S    LCTL_T(KC_S)
 
 // Right hand (Gallium home row: P H A E I)
-#define HM_P    RGUI_T(KC_P)
+#define HM_P    RCTL_T(KC_P)
 #define HM_A    RALT_T(KC_A)
-#define HM_E    RCTL_T(KC_E)
+#define HM_E    RGUI_T(KC_E)
 #define HM_I    RSFT_T(KC_I)
 
 // ─── Thumb Keys ─────────────────────────────────────────────────────────────
@@ -133,18 +133,18 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // ┌──────────────────────────────────────────────────────────────────────┐
-    // │ Base — Gallium v1 with SCAG home row mods                           │
+    // │ Base — Gallium v1 with SGAC home row mods (Windows)                 │
     // └──────────────────────────────────────────────────────────────────────┘
     //
     // ,--------------------------------------------.  ,--------------------------------------------.
     // | Tab  |  B   |  L   |  D   |  C   |  V     |  |  J   |  Y   |  O   |  U   |  ,   | Bspc   |
     // |------+------+------+------+------+---------|  |------+------+------+------+------+---------|
     // | Esc  |  N   |  R   |  T   |  S   |  G     |  |  P   |  H   |  A   |  E   |  I   |  ;     |
-    // |      | Sft  | Ctl  | Opt  | Cmd  |        |  | Cmd  |      | Opt  | Ctl  | Sft  |        |
+    // |      | Sft  | Win  | Alt  | Ctl  |        |  | Ctl  |      | Alt  | Win  | Sft  |        |
     // |------+------+------+------+------+---------|  |------+------+------+------+------+---------|
     // | Sft  |  Q   |  X   |  M   |  W   |  Z     |  |  K   |  F   |  '   |  /   |  .   | Sft    |
     // `------+------+------+------+------+---------'  `---------+------+------+------+------+------'
-    //                      | Opt  | Cmd  | Lwr/ |      | Rse/ | Cmd  | Opt  |
+    //                      | Alt  | Ctl  | Lwr/ |      | Rse/ | Ctl  | Alt  |
     //                      |      |      | Spc  |      | Ent  |      |      |
     //                      `--------------------'      `--------------------'
 
@@ -152,7 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_B,    KC_L,    KC_D,    KC_C,    KC_V,         KC_J,    KC_Y,    KC_O,    KC_U,    KC_COMM, KC_BSPC,
         KC_ESC,  HM_N,    HM_R,    HM_T,    HM_S,    KC_G,         HM_P,    KC_H,    HM_A,    HM_E,    HM_I,    KC_SCLN,
         KC_LSFT, KC_Q,    KC_X,    KC_M,    KC_W,    KC_Z,         KC_K,    KC_F,    KC_QUOT, KC_SLSH, KC_DOT,  KC_RSFT,
-                                    KC_LALT, KC_LGUI, LW_SPC,       RS_ENT,  KC_RGUI, FK_ENT
+                                    KC_LALT, KC_LCTL, LW_SPC,       RS_ENT,  KC_RCTL, FK_ENT
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐
@@ -169,10 +169,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // ┌──────────────────────────────────────────────────────────────────────┐
     // │ Raise — Navigation, editing, media                                  │
     // └──────────────────────────────────────────────────────────────────────┘
+    //
+    // Clipboard shortcuts use Ctrl (Windows standard)
+    // Mods row follows SGAC order: Shift, Win, Alt, Ctrl
 
     [_RAISE] = LAYOUT_split_3x6_3(
-        KC_TRNS, G(KC_Z), G(KC_X), G(KC_C), G(KC_V), KC_NO,        KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_NO,   KC_DEL,
-        KC_TRNS, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, KC_NO,        KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_NO,   KC_NO,
+        KC_TRNS, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), KC_NO,        KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_NO,   KC_DEL,
+        KC_TRNS, KC_LSFT, KC_LGUI, KC_LALT, KC_LCTL, KC_NO,        KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_NO,   KC_NO,
         KC_TRNS, KC_VOLD, KC_VOLU, KC_MUTE, KC_MPLY, KC_NO,        KC_NO,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
                                     KC_TRNS, KC_TRNS, MO(_SYMBOLS), KC_TRNS, KC_TRNS, KC_TRNS
     ),
@@ -189,7 +192,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐
-    // │ F-Keys — F1-F12 on left hand (hold right outer thumb)               │
+    // │ F-Keys — F1-F12 on left hand (held via right outer thumb)           │
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_FKEYS] = LAYOUT_split_3x6_3(
@@ -210,14 +213,9 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
                        '*', '*', '*',  '*', '*', '*'
     );
 
-// ─── Last Key Tracking & Mash Guard ─────────────────────────────────────────
+// ─── Last Key Tracking ──────────────────────────────────────────────────────
 
 static char last_key_char = 0;
-
-// Mash guard state: uses original hardware event timestamp to detect truly
-// simultaneous accidental keypresses. Bypasses for mod-tap / layer-tap keys.
-static uint16_t mash_last_event_time = 0;
-static uint16_t mash_last_keycode    = KC_NO;
 
 static char keycode_to_char(uint16_t keycode, uint8_t mods) {
     if (keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) {
@@ -244,6 +242,14 @@ static char keycode_to_char(uint16_t keycode, uint8_t mods) {
     if (keycode == KC_SLSH) return shifted ? '?' : '/';
     return 0;
 }
+
+// ─── Mash Guard ─────────────────────────────────────────────────────────────
+// Uses the original hardware event timestamp to detect truly simultaneous
+// accidental keypresses (typically < 5ms apart). Bypasses for mod-tap and
+// layer-tap keys so home row mods and thumb keys are never affected.
+
+static uint16_t mash_last_event_time = 0;
+static uint16_t mash_last_keycode    = KC_NO;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
@@ -375,7 +381,7 @@ bool oled_task_user(void) {
     if (!is_keyboard_master()) return false;
 
     oled_set_cursor(0, 0);
-    oled_write_ln_P(PSTR("GALLM"), false);
+    oled_write_ln_P(PSTR("GLWIN"), false);
 
     oled_set_cursor(0, 1);
     oled_write_ln(get_layer_name(), false);
