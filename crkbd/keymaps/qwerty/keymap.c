@@ -39,6 +39,7 @@ enum layers {
 #define LW_SPC  LT(_LOWER, KC_SPC)
 #define RS_ENT  LT(_RAISE, KC_ENT)
 #define FK_ENT  LT(_FKEYS, KC_ENT)
+#define NV_TAB  LT(_RAISE, KC_TAB)
 
 // ─── Combo Definitions ──────────────────────────────────────────────────────
 
@@ -132,10 +133,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // └──────────────────────────────────────────────────────────────────────┘
     //
     // ,--------------------------------------------.  ,--------------------------------------------.
-    // | Tab  |  Q   |  W   |  E   |  R   |  T     |  |  Y   |  U   |  I   |  O   |  P   | Bspc   |
+    // | `  ~ |  Q   |  W   |  E   |  R   |  T     |  |  Y   |  U   |  I   |  O   |  P   | Bspc   |
     // |------+------+------+------+------+---------|  |------+------+------+------+------+---------|
-    // | Esc  |  A   |  S   |  D   |  F   |  G     |  |  H   |  J   |  K   |  L   |  ;   |  '     |
-    // |      | Sft  | Ctl  | Opt  | Cmd  |        |  |      | Cmd  | Opt  | Ctl  | Sft  |        |
+    // | Tab  |  A   |  S   |  D   |  F   |  G     |  |  H   |  J   |  K   |  L   |  ;   |  '     |
+    // | /Rse | Sft  | Ctl  | Opt  | Cmd  |        |  |      | Cmd  | Opt  | Ctl  | Sft  |        |
     // |------+------+------+------+------+---------|  |------+------+------+------+------+---------|
     // | Sft  |  Z   |  X   |  C   |  V   |  B     |  |  N   |  M   |  ,   |  .   |  /   | Sft    |
     // `------+------+------+------+------+---------'  `---------+------+------+------+------+------'
@@ -144,8 +145,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //                      `--------------------'      `--------------------'
 
     [_BASE] = LAYOUT_split_3x6_3(
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-        KC_ESC,  HM_A,    HM_S,    HM_D,    HM_F,    KC_G,         KC_H,    HM_J,    HM_K,    HM_L,    HM_SCLN, KC_QUOT,
+        KC_GRV,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+        NV_TAB,  HM_A,    HM_S,    HM_D,    HM_F,    KC_G,         KC_H,    HM_J,    HM_K,    HM_L,    HM_SCLN, KC_QUOT,
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                                     KC_LALT, KC_LGUI, LW_SPC,       RS_ENT,  KC_RGUI, FK_ENT
     ),
@@ -166,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_RAISE] = LAYOUT_split_3x6_3(
-        KC_TRNS, G(KC_Z), G(KC_X), G(KC_C), G(KC_V), KC_NO,        KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_NO,   KC_DEL,
+        KC_ESC,  G(KC_Z), G(KC_X), G(KC_C), G(KC_V), KC_NO,        KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_NO,   KC_DEL,
         KC_TRNS, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, KC_NO,        KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_NO,   KC_NO,
         KC_TRNS, KC_VOLD, KC_VOLU, KC_MUTE, KC_MPLY, KC_NO,        KC_NO,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
                                     KC_TRNS, KC_TRNS, MO(_SYMBOLS), KC_TRNS, KC_TRNS, KC_TRNS
@@ -198,7 +199,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //                      `--------------------'      `--------------------'
 
     [_FKEYS] = LAYOUT_split_3x6_3(
-        KC_TRNS, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_F11,  KC_F12,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                     KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS
