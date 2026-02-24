@@ -3,7 +3,7 @@
 
 #pragma once
 
-#define DYNAMIC_KEYMAP_LAYER_COUNT 6
+#define DYNAMIC_KEYMAP_LAYER_COUNT 8
 #define TAPPING_TERM 220
 #define QUICK_TAP_TERM 120        // Repeat key on fast double-tap instead of hold
 #define CHORDAL_HOLD              // Same-hand keys = tap, opposite-hand = hold
@@ -17,6 +17,9 @@
 #define COMBO_ONLY_FROM_LAYER 0
 #define COMBO_TERM 80
 #define COMBO_STRICT_TIMER
+
+// Anti-mash guard: suppress accidental simultaneous keypresses within this window (ms)
+#define MASH_GUARD_TERM 8
 
 // Trackpad support
 #define AZOTEQ_IQS5XX_WIDTH_MM  43
