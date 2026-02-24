@@ -1,0 +1,37 @@
+# general words that didn't make the cut and had to be added manually
+basic
+consider
+actual
+exact
+possibl
+probabl
+sound
+sacramento
+california
+
+# technical terms
+firmware
+python
+commit
+
+# hobby terms
+headphones
+vinyl
+mechanical
+keyboard
+
+# science terms
+geology
+baseline
+analysis
+measure
+
+# profanity
+cunt
+fuck
+fucking
+shit
+bitch
+asshole
+dick
+cock

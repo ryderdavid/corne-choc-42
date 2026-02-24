@@ -1,0 +1,128 @@
+// Corne Choc 42-Key — Gallium Word Chords
+// All combos include the space thumb key (LW_SPC) as differentiator
+// Uses Gallium keycodes (including mod-tap wrappers for home row)
+//
+// Gallium home row: N(Sft) R(Ctl) T(Opt) S(Cmd) G | P(Cmd) H A(Opt) E(Ctl) I(Sft)
+
+// ─── Utility Combos ─────────────────────────────────────────────────────────
+
+const uint16_t PROGMEM cmb_esc[]     = {KC_TAB, KC_B, COMBO_END};
+const uint16_t PROGMEM cmb_del[]     = {HM_S, HM_T, COMBO_END};
+const uint16_t PROGMEM cmb_bspc[]    = {KC_H, HM_A, COMBO_END};
+const uint16_t PROGMEM cmb_hyper_z[] = {KC_LSFT, KC_Q, COMBO_END};
+
+// ─── Word Chords (Space + letter keys) ──────────────────────────────────────
+// Key references use Gallium keycodes including mod-tap wrappers
+
+const uint16_t PROGMEM wc_the[]   = {HM_T, KC_H, LW_SPC, COMBO_END};        // the
+const uint16_t PROGMEM wc_be[]    = {KC_B, HM_E, LW_SPC, COMBO_END};        // be
+const uint16_t PROGMEM wc_to[]    = {HM_T, KC_O, LW_SPC, COMBO_END};        // to
+const uint16_t PROGMEM wc_and[]   = {HM_A, HM_N, LW_SPC, COMBO_END};       // and
+const uint16_t PROGMEM wc_of[]    = {KC_O, KC_F, LW_SPC, COMBO_END};        // of
+const uint16_t PROGMEM wc_in[]    = {HM_I, HM_N, LW_SPC, COMBO_END};       // in
+const uint16_t PROGMEM wc_have[]  = {KC_H, KC_V, LW_SPC, COMBO_END};       // have
+const uint16_t PROGMEM wc_that[]  = {HM_T, KC_H, HM_A, LW_SPC, COMBO_END}; // that
+const uint16_t PROGMEM wc_for[]   = {KC_F, HM_R, LW_SPC, COMBO_END};       // for
+const uint16_t PROGMEM wc_not[]   = {HM_N, HM_T, LW_SPC, COMBO_END};       // not
+const uint16_t PROGMEM wc_with[]  = {KC_W, HM_I, LW_SPC, COMBO_END};       // with
+const uint16_t PROGMEM wc_you[]   = {KC_Y, KC_O, LW_SPC, COMBO_END};       // you
+const uint16_t PROGMEM wc_this[]  = {HM_T, HM_I, LW_SPC, COMBO_END};       // this
+const uint16_t PROGMEM wc_from[]  = {KC_F, HM_R, KC_O, LW_SPC, COMBO_END}; // from
+const uint16_t PROGMEM wc_but[]   = {KC_B, KC_U, LW_SPC, COMBO_END};       // but
+const uint16_t PROGMEM wc_what[]  = {KC_W, HM_A, LW_SPC, COMBO_END};       // what
+const uint16_t PROGMEM wc_it[]    = {HM_I, HM_T, LW_SPC, COMBO_END};       // it
+const uint16_t PROGMEM wc_he[]    = {KC_H, HM_E, LW_SPC, COMBO_END};       // he
+const uint16_t PROGMEM wc_on[]    = {KC_O, HM_N, LW_SPC, COMBO_END};       // on
+const uint16_t PROGMEM wc_are[]   = {HM_A, HM_R, LW_SPC, COMBO_END};       // are
+const uint16_t PROGMEM wc_do[]    = {KC_D, KC_O, LW_SPC, COMBO_END};       // do
+const uint16_t PROGMEM wc_his[]   = {KC_H, HM_I, LW_SPC, COMBO_END};       // his
+const uint16_t PROGMEM wc_by[]    = {KC_B, KC_Y, LW_SPC, COMBO_END};       // by
+const uint16_t PROGMEM wc_they[]  = {HM_T, KC_Y, LW_SPC, COMBO_END};       // they
+const uint16_t PROGMEM wc_her[]   = {KC_H, HM_R, LW_SPC, COMBO_END};       // her
+const uint16_t PROGMEM wc_or[]    = {KC_O, HM_R, LW_SPC, COMBO_END};       // or
+const uint16_t PROGMEM wc_at[]    = {HM_A, HM_T, LW_SPC, COMBO_END};       // at
+const uint16_t PROGMEM wc_one[]   = {KC_O, HM_E, LW_SPC, COMBO_END};       // one
+const uint16_t PROGMEM wc_had[]   = {KC_H, KC_D, LW_SPC, COMBO_END};       // had
+const uint16_t PROGMEM wc_say[]   = {HM_S, KC_Y, LW_SPC, COMBO_END};       // say
+const uint16_t PROGMEM wc_she[]   = {HM_S, KC_H, LW_SPC, COMBO_END};       // she
+const uint16_t PROGMEM wc_all[]   = {HM_A, KC_L, LW_SPC, COMBO_END};       // all
+const uint16_t PROGMEM wc_which[] = {KC_W, KC_H, LW_SPC, COMBO_END};       // which
+const uint16_t PROGMEM wc_will[]  = {KC_W, KC_L, LW_SPC, COMBO_END};       // will
+const uint16_t PROGMEM wc_would[] = {KC_W, KC_D, LW_SPC, COMBO_END};       // would
+const uint16_t PROGMEM wc_there[] = {HM_T, HM_R, LW_SPC, COMBO_END};       // there
+const uint16_t PROGMEM wc_their[] = {HM_T, HM_E, HM_I, LW_SPC, COMBO_END}; // their
+const uint16_t PROGMEM wc_my[]    = {KC_M, KC_Y, LW_SPC, COMBO_END};       // my
+const uint16_t PROGMEM wc_out[]   = {KC_O, KC_U, LW_SPC, COMBO_END};       // out
+const uint16_t PROGMEM wc_up[]    = {KC_U, HM_P, LW_SPC, COMBO_END};       // up
+const uint16_t PROGMEM wc_about[] = {HM_A, KC_B, LW_SPC, COMBO_END};       // about
+const uint16_t PROGMEM wc_who[]   = {KC_W, KC_O, LW_SPC, COMBO_END};       // who
+const uint16_t PROGMEM wc_get[]   = {KC_G, HM_E, LW_SPC, COMBO_END};       // get
+const uint16_t PROGMEM wc_make[]  = {KC_M, KC_K, LW_SPC, COMBO_END};       // make
+const uint16_t PROGMEM wc_go[]    = {KC_G, KC_O, LW_SPC, COMBO_END};       // go
+const uint16_t PROGMEM wc_like[]  = {KC_L, KC_K, LW_SPC, COMBO_END};       // like
+const uint16_t PROGMEM wc_just[]  = {KC_J, KC_U, LW_SPC, COMBO_END};       // just
+const uint16_t PROGMEM wc_know[]  = {KC_K, HM_N, LW_SPC, COMBO_END};       // know
+const uint16_t PROGMEM wc_take[]  = {HM_T, KC_K, LW_SPC, COMBO_END};       // take
+const uint16_t PROGMEM wc_come[]  = {KC_C, KC_M, LW_SPC, COMBO_END};       // come
+
+// ─── Combo Array ────────────────────────────────────────────────────────────
+
+combo_t key_combos[COMBO_COUNT] = {
+    // Utility
+    [CMB_ESC]     = COMBO(cmb_esc, KC_ESC),
+    [CMB_DEL]     = COMBO(cmb_del, KC_DEL),
+    [CMB_BSPC]    = COMBO(cmb_bspc, KC_BSPC),
+    [CMB_HYPER_Z] = COMBO(cmb_hyper_z, HYPR(KC_Z)),
+
+    // Word chords
+    [WC_THE]   = COMBO_ACTION(wc_the),
+    [WC_BE]    = COMBO_ACTION(wc_be),
+    [WC_TO]    = COMBO_ACTION(wc_to),
+    [WC_AND]   = COMBO_ACTION(wc_and),
+    [WC_OF]    = COMBO_ACTION(wc_of),
+    [WC_IN]    = COMBO_ACTION(wc_in),
+    [WC_HAVE]  = COMBO_ACTION(wc_have),
+    [WC_THAT]  = COMBO_ACTION(wc_that),
+    [WC_FOR]   = COMBO_ACTION(wc_for),
+    [WC_NOT]   = COMBO_ACTION(wc_not),
+    [WC_WITH]  = COMBO_ACTION(wc_with),
+    [WC_YOU]   = COMBO_ACTION(wc_you),
+    [WC_THIS]  = COMBO_ACTION(wc_this),
+    [WC_FROM]  = COMBO_ACTION(wc_from),
+    [WC_BUT]   = COMBO_ACTION(wc_but),
+    [WC_WHAT]  = COMBO_ACTION(wc_what),
+    [WC_IT]    = COMBO_ACTION(wc_it),
+    [WC_HE]    = COMBO_ACTION(wc_he),
+    [WC_ON]    = COMBO_ACTION(wc_on),
+    [WC_ARE]   = COMBO_ACTION(wc_are),
+    [WC_DO]    = COMBO_ACTION(wc_do),
+    [WC_HIS]   = COMBO_ACTION(wc_his),
+    [WC_BY]    = COMBO_ACTION(wc_by),
+    [WC_THEY]  = COMBO_ACTION(wc_they),
+    [WC_HER]   = COMBO_ACTION(wc_her),
+    [WC_OR]    = COMBO_ACTION(wc_or),
+    [WC_AT]    = COMBO_ACTION(wc_at),
+    [WC_ONE]   = COMBO_ACTION(wc_one),
+    [WC_HAD]   = COMBO_ACTION(wc_had),
+    [WC_SAY]   = COMBO_ACTION(wc_say),
+    [WC_SHE]   = COMBO_ACTION(wc_she),
+    [WC_ALL]   = COMBO_ACTION(wc_all),
+    [WC_WHICH] = COMBO_ACTION(wc_which),
+    [WC_WILL]  = COMBO_ACTION(wc_will),
+    [WC_WOULD] = COMBO_ACTION(wc_would),
+    [WC_THERE] = COMBO_ACTION(wc_there),
+    [WC_THEIR] = COMBO_ACTION(wc_their),
+    [WC_MY]    = COMBO_ACTION(wc_my),
+    [WC_OUT]   = COMBO_ACTION(wc_out),
+    [WC_UP]    = COMBO_ACTION(wc_up),
+    [WC_ABOUT] = COMBO_ACTION(wc_about),
+    [WC_WHO]   = COMBO_ACTION(wc_who),
+    [WC_GET]   = COMBO_ACTION(wc_get),
+    [WC_MAKE]  = COMBO_ACTION(wc_make),
+    [WC_GO]    = COMBO_ACTION(wc_go),
+    [WC_LIKE]  = COMBO_ACTION(wc_like),
+    [WC_JUST]  = COMBO_ACTION(wc_just),
+    [WC_KNOW]  = COMBO_ACTION(wc_know),
+    [WC_TAKE]  = COMBO_ACTION(wc_take),
+    [WC_COME]  = COMBO_ACTION(wc_come),
+};

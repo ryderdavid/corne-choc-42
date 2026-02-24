@@ -1,0 +1,25 @@
+# Supplementary corrections from actual user typos on Corne column stagger
+# These capture patterns the algorithmic generator might miss
+
+# v/c swaps (very common on column stagger — bottom row neighbors)
+:voming -> coming
+:volumn -> column
+:logiv: -> logic
+:logivally -> logically
+
+# j/h confusion (column stagger offset on index fingers)
+:jhabe -> have
+:jhave -> have
+:jhad: -> had
+:jhas: -> has
+
+# Adjacent insertions from fat-fingering neighboring columns
+:givwen -> given
+:thant: -> that
+:noiwq -> now
+:helpo: -> help
+
+# r insertion (column neighbor)
+:tro: -> to
+:fro: -> for
+:trhe: -> the

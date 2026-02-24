@@ -17,6 +17,7 @@ enum layers {
     _LOWER,
     _RAISE,
     _SYMBOLS,
+    _FKEYS,
 };
 
 // ─── Home Row Mods — SCAG (Shift-Ctrl-Alt/Opt-Gui/Cmd) ─────────────────────
@@ -37,6 +38,7 @@ enum layers {
 
 #define LW_SPC  LT(_LOWER, KC_SPC)
 #define RS_ENT  LT(_RAISE, KC_ENT)
+#define FK_ENT  LT(_FKEYS, KC_ENT)
 
 // ─── Combo Definitions ──────────────────────────────────────────────────────
 
@@ -145,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
         KC_ESC,  HM_A,    HM_S,    HM_D,    HM_F,    KC_G,         KC_H,    HM_J,    HM_K,    HM_L,    HM_SCLN, KC_QUOT,
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                                    KC_LALT, KC_LGUI, LW_SPC,       RS_ENT,  KC_RGUI, KC_RALT
+                                    KC_LALT, KC_LGUI, LW_SPC,       RS_ENT,  KC_RGUI, FK_ENT
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐
@@ -155,8 +157,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LOWER] = LAYOUT_split_3x6_3(
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
         KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE,
-        KC_TRNS, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,        KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_TRNS,
-                                    KC_TRNS, KC_TRNS, KC_TRNS,      MO(_SYMBOLS), KC_F11, KC_F12
+        KC_TRNS, KC_DOT,  KC_ASTR, KC_SLSH, KC_PLUS, KC_MINS,      KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_TRNS,
+                                    KC_TRNS, KC_TRNS, KC_TRNS,      MO(_SYMBOLS), KC_TRNS, KC_TRNS
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐
@@ -180,6 +182,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS, KC_TILD, KC_GRV,  KC_DOT,  KC_COMM, KC_SLSH,      KC_PLUS, KC_COLN, KC_SCLN, KC_DQUO, KC_QUOT, KC_TRNS,
                                     KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS
     ),
+
+    // ┌──────────────────────────────────────────────────────────────────────┐
+    // │ F-Keys — F1-F12 on left hand (hold right outer thumb)               │
+    // └──────────────────────────────────────────────────────────────────────┘
+    //
+    // ,--------------------------------------------.  ,--------------------------------------------.
+    // |      |  F1  |  F2  |  F3  |  F4  |  F5    |  |      |      |      |      |      |        |
+    // |------+------+------+------+------+---------|  |------+------+------+------+------+---------|
+    // |      |  F6  |  F7  |  F8  |  F9  | F10    |  |      |      |      |      |      |        |
+    // |------+------+------+------+------+---------|  |------+------+------+------+------+---------|
+    // |      |      |      |      | F11  | F12    |  |      |      |      |      |      |        |
+    // `------+------+------+------+------+---------'  `---------+------+------+------+------+------'
+    //                      |      |      |      |      |      |      | ▓▓▓▓ |
+    //                      `--------------------'      `--------------------'
+
+    [_FKEYS] = LAYOUT_split_3x6_3(
+        KC_TRNS, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_F11,  KC_F12,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                                    KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS
+    ),
 };
 
 // ─── Chordal Hold (opposite-hand rule for home row mods) ────────────────────
@@ -192,9 +215,14 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
                        '*', '*', '*',  '*', '*', '*'
     );
 
-// ─── Last Key Tracking ──────────────────────────────────────────────────────
+// ─── Last Key Tracking & Mash Guard ─────────────────────────────────────────
 
 static char last_key_char = 0;
+
+// Mash guard state: uses original hardware event timestamp to detect truly
+// simultaneous accidental keypresses. Bypasses for mod-tap / layer-tap keys.
+static uint16_t mash_last_event_time = 0;
+static uint16_t mash_last_keycode    = KC_NO;
 
 static char keycode_to_char(uint16_t keycode, uint8_t mods) {
     if (keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) {
@@ -224,6 +252,19 @@ static char keycode_to_char(uint16_t keycode, uint8_t mods) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
+        bool prev_is_special = (mash_last_keycode >= QK_MOD_TAP   && mash_last_keycode <= QK_MOD_TAP_MAX) ||
+                               (mash_last_keycode >= QK_LAYER_TAP && mash_last_keycode <= QK_LAYER_TAP_MAX);
+        bool curr_is_special = (keycode >= QK_MOD_TAP   && keycode <= QK_MOD_TAP_MAX) ||
+                               (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX);
+
+        if (!prev_is_special && !curr_is_special &&
+            TIMER_DIFF_16(record->event.time, mash_last_event_time) < MASH_GUARD_TERM) {
+            return false;  // suppress accidental simultaneous press
+        }
+
+        mash_last_event_time = record->event.time;
+        mash_last_keycode    = keycode;
+
         char c = keycode_to_char(keycode, get_mods());
         if (c) last_key_char = c;
     }
@@ -330,6 +371,7 @@ static const char *get_layer_name(void) {
         case _LOWER:   return "Lower";
         case _RAISE:   return "Raise";
         case _SYMBOLS: return "Symbl";
+        case _FKEYS:   return "FKeys";
         default:       return "?????";
     }
 }
