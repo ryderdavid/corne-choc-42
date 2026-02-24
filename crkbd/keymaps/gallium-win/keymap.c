@@ -2,9 +2,9 @@
 // Windows-optimized with SGAC home row mods + word chording + enhanced OLED
 //
 // Gallium v1 alpha layout:
-//   b l d c v   j y o u ,
+//   b l d c v   j y o u -
 //   n r t s g   p h a e i
-//   q x m w z   k f ' / .
+//   q x m w z   k f , . '
 //
 // Layers:
 //   0 = Base (Gallium v1)
@@ -44,6 +44,7 @@ enum layers {
 #define LW_SPC  LT(_LOWER, KC_SPC)
 #define RS_ENT  LT(_RAISE, KC_ENT)
 #define FK_ENT  LT(_FKEYS, KC_ENT)
+#define NV_TAB  LT(_RAISE, KC_TAB)
 
 // ─── Combo Definitions ──────────────────────────────────────────────────────
 
@@ -137,21 +138,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // └──────────────────────────────────────────────────────────────────────┘
     //
     // ,--------------------------------------------.  ,--------------------------------------------.
-    // | Tab  |  B   |  L   |  D   |  C   |  V     |  |  J   |  Y   |  O   |  U   |  ,   | Bspc   |
+    // | `  ~ |  B   |  L   |  D   |  C   |  V     |  |  J   |  Y   |  O   |  U   |  -   | Bspc   |
     // |------+------+------+------+------+---------|  |------+------+------+------+------+---------|
-    // | Esc  |  N   |  R   |  T   |  S   |  G     |  |  P   |  H   |  A   |  E   |  I   |  ;     |
-    // |      | Sft  | Win  | Alt  | Ctl  |        |  | Ctl  |      | Alt  | Win  | Sft  |        |
+    // | Tab  |  N   |  R   |  T   |  S   |  G     |  |  P   |  H   |  A   |  E   |  I   |  ;     |
+    // | /Rse | Sft  | Win  | Alt  | Ctl  |        |  | Ctl  |      | Alt  | Win  | Sft  |        |
     // |------+------+------+------+------+---------|  |------+------+------+------+------+---------|
-    // | Sft  |  Q   |  X   |  M   |  W   |  Z     |  |  K   |  F   |  '   |  /   |  .   | Sft    |
+    // | Sft  |  Q   |  X   |  M   |  W   |  Z     |  |  K   |  F   |  ,   |  .   |  '   | Sft    |
     // `------+------+------+------+------+---------'  `---------+------+------+------+------+------'
     //                      | Alt  | Ctl  | Lwr/ |      | Rse/ | Ctl  | Alt  |
     //                      |      |      | Spc  |      | Ent  |      |      |
     //                      `--------------------'      `--------------------'
 
     [_BASE] = LAYOUT_split_3x6_3(
-        KC_TAB,  KC_B,    KC_L,    KC_D,    KC_C,    KC_V,         KC_J,    KC_Y,    KC_O,    KC_U,    KC_COMM, KC_BSPC,
-        KC_ESC,  HM_N,    HM_R,    HM_T,    HM_S,    KC_G,         HM_P,    KC_H,    HM_A,    HM_E,    HM_I,    KC_SCLN,
-        KC_LSFT, KC_Q,    KC_X,    KC_M,    KC_W,    KC_Z,         KC_K,    KC_F,    KC_QUOT, KC_SLSH, KC_DOT,  KC_RSFT,
+        KC_GRV,  KC_B,    KC_L,    KC_D,    KC_C,    KC_V,         KC_J,    KC_Y,    KC_O,    KC_U,    KC_MINS, KC_BSPC,
+        NV_TAB,  HM_N,    HM_R,    HM_T,    HM_S,    KC_G,         HM_P,    KC_H,    HM_A,    HM_E,    HM_I,    KC_SCLN,
+        KC_LSFT, KC_Q,    KC_X,    KC_M,    KC_W,    KC_Z,         KC_K,    KC_F,    KC_COMM, KC_DOT,  KC_QUOT, KC_RSFT,
                                     KC_LALT, KC_LCTL, LW_SPC,       RS_ENT,  KC_RCTL, FK_ENT
     ),
 
@@ -174,7 +175,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // Mods row follows SGAC order: Shift, Win, Alt, Ctrl
 
     [_RAISE] = LAYOUT_split_3x6_3(
-        KC_TRNS, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), KC_NO,        KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_NO,   KC_DEL,
+        KC_ESC,  C(KC_Z), C(KC_X), C(KC_C), C(KC_V), KC_NO,        KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_NO,   KC_DEL,
         KC_TRNS, KC_LSFT, KC_LGUI, KC_LALT, KC_LCTL, KC_NO,        KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_NO,   KC_NO,
         KC_TRNS, KC_VOLD, KC_VOLU, KC_MUTE, KC_MPLY, KC_NO,        KC_NO,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
                                     KC_TRNS, KC_TRNS, MO(_SYMBOLS), KC_TRNS, KC_TRNS, KC_TRNS
@@ -196,7 +197,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_FKEYS] = LAYOUT_split_3x6_3(
-        KC_TRNS, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_F11,  KC_F12,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                     KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS

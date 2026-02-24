@@ -250,9 +250,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_GALLIUM] = LAYOUT_split_3x6_3(
-        KC_TAB,     KC_B,    KC_L,    KC_D,    KC_C,    KC_V,              KC_J,    KC_Y,    KC_O,    KC_U,    KC_COMM, KC_BSPC,
-        MO(_NAV),   GM_N,    GM_R,    GM_T,    GM_S,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_P), GM_H, GM_A, GM_E, GM_I, LT(_NAV,KC_SCLN),
-        KC_LSFT,    KC_Q,    KC_X,    KC_M,    KC_W,    KC_Z,              KC_K,    KC_F,    KC_QUOT, KC_SLSH, KC_DOT,  RSFT_T(KC_SLSH),
+        KC_GRV,          KC_B,    KC_L,    KC_D,    KC_C,    KC_V,              KC_J,    KC_Y,    KC_O,    KC_U,    KC_MINS, KC_BSPC,
+        LT(_NAV,KC_TAB), GM_N,    GM_R,    GM_T,    GM_S,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_P), GM_H, GM_A, GM_E, GM_I, LT(_NAV,KC_SCLN),
+        KC_LSFT,          KC_Q,    KC_X,    KC_M,    KC_W,    KC_Z,              KC_K,    KC_F,    KC_COMM, KC_DOT,  KC_QUOT, RSFT_T(KC_SLSH),
                                        KC_LGUI, SYM_ENT, NAV_BSP,    NAV_SPC, SYM_SPC, FK_ENT
     ),
 
@@ -272,9 +272,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_GALLIUM_WIN] = LAYOUT_split_3x6_3(
-        KC_TAB,     KC_B,    KC_L,    KC_D,    KC_C,    KC_V,              KC_J,    KC_Y,    KC_O,    KC_U,    KC_COMM, KC_BSPC,
-        MO(_NAV),   GW_N,    GW_R,    GW_T,    GW_S,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_P), GW_H, GW_A, GW_E, GW_I, LT(_NAV,KC_SCLN),
-        KC_LSFT,    KC_Q,    KC_X,    KC_M,    KC_W,    KC_Z,              KC_K,    KC_F,    KC_QUOT, KC_SLSH, KC_DOT,  RSFT_T(KC_SLSH),
+        KC_GRV,          KC_B,    KC_L,    KC_D,    KC_C,    KC_V,              KC_J,    KC_Y,    KC_O,    KC_U,    KC_MINS, KC_BSPC,
+        LT(_NAV,KC_TAB), GW_N,    GW_R,    GW_T,    GW_S,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_P), GW_H, GW_A, GW_E, GW_I, LT(_NAV,KC_SCLN),
+        KC_LSFT,          KC_Q,    KC_X,    KC_M,    KC_W,    KC_Z,              KC_K,    KC_F,    KC_COMM, KC_DOT,  KC_QUOT, RSFT_T(KC_SLSH),
                                        KC_LCTL, SYM_ENT, NAV_BSP,    NAV_SPC, SYM_SPC, FK_ENT
     ),
 
@@ -294,7 +294,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_NAV] = LAYOUT_split_3x6_3(
-        KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_NO,   KC_PGUP, KC_UP,   KC_PGDN, G(KC_EQL),  KC_BSPC,
+        KC_ESC,  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_NO,   KC_PGUP, KC_UP,   KC_PGDN, G(KC_EQL),  KC_BSPC,
         KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, G(KC_MINS), KC_TRNS,
         KC_TRNS, CK_UNDO, CK_CUT,  CK_COPY, CK_PASTE, KC_NO,      KC_END,  MS_WHLD, KC_NO,   MS_WHLU, G(KC_0),    KC_NO,
                                     KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS
@@ -316,7 +316,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_FKEYS] = LAYOUT_split_3x6_3(
-        KC_TRNS, G(S(KC_1)), G(S(KC_2)), G(S(KC_3)), G(S(KC_4)), G(S(KC_5)),  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_BSPC,
+        KC_ESC,  G(S(KC_1)), G(S(KC_2)), G(S(KC_3)), G(S(KC_4)), G(S(KC_5)),  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_BSPC,
         KC_TRNS, G(S(KC_6)), G(S(KC_7)), G(S(KC_8)), G(S(KC_9)), G(S(KC_0)),  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                 KC_F11,  KC_F12,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                     KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS
