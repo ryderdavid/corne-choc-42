@@ -239,7 +239,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_QWERTY] = LAYOUT_split_3x6_3(
-        KC_TAB,     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
+        KC_TAB,     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
         MO(_NAV),   HM_A,    HM_S,    HM_D,    HM_F,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_H), HM_J, HM_K, HM_L, HM_SCLN, KC_QUOT,
         KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,              KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_SLSH),
                                        KC_LGUI, SYM_ENT, NAV_BSP,    NAV_SPC, SYM_SPC, FK_ENT
@@ -250,7 +250,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_GALLIUM] = LAYOUT_split_3x6_3(
-        KC_TAB,     KC_B,    KC_L,    KC_D,    KC_C,    KC_V,              KC_J,    KC_Y,    KC_O,    KC_U,    KC_COMM, KC_MINS,
+        KC_TAB,     KC_B,    KC_L,    KC_D,    KC_C,    KC_V,              KC_J,    KC_Y,    KC_O,    KC_U,    KC_COMM, KC_BSPC,
         MO(_NAV),   GM_N,    GM_R,    GM_T,    GM_S,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_P), GM_H, GM_A, GM_E, GM_I, LT(_NAV,KC_SCLN),
         KC_LSFT,    KC_Q,    KC_X,    KC_M,    KC_W,    KC_Z,              KC_K,    KC_F,    KC_QUOT, KC_SLSH, KC_DOT,  RSFT_T(KC_SLSH),
                                        KC_LGUI, SYM_ENT, NAV_BSP,    NAV_SPC, SYM_SPC, FK_ENT
@@ -261,7 +261,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_QWERTY_WIN] = LAYOUT_split_3x6_3(
-        KC_TAB,     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
+        KC_TAB,     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
         MO(_NAV),   WM_A,    WM_S,    WM_D,    WM_F,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_H), WM_J, WM_K, WM_L, WM_SCLN, KC_QUOT,
         KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,              KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_SLSH),
                                        KC_LCTL, SYM_ENT, NAV_BSP,    NAV_SPC, SYM_SPC, FK_ENT
@@ -272,7 +272,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_GALLIUM_WIN] = LAYOUT_split_3x6_3(
-        KC_TAB,     KC_B,    KC_L,    KC_D,    KC_C,    KC_V,              KC_J,    KC_Y,    KC_O,    KC_U,    KC_COMM, KC_MINS,
+        KC_TAB,     KC_B,    KC_L,    KC_D,    KC_C,    KC_V,              KC_J,    KC_Y,    KC_O,    KC_U,    KC_COMM, KC_BSPC,
         MO(_NAV),   GW_N,    GW_R,    GW_T,    GW_S,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_P), GW_H, GW_A, GW_E, GW_I, LT(_NAV,KC_SCLN),
         KC_LSFT,    KC_Q,    KC_X,    KC_M,    KC_W,    KC_Z,              KC_K,    KC_F,    KC_QUOT, KC_SLSH, KC_DOT,  RSFT_T(KC_SLSH),
                                        KC_LCTL, SYM_ENT, NAV_BSP,    NAV_SPC, SYM_SPC, FK_ENT
@@ -305,7 +305,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_SYMBOLS] = LAYOUT_split_3x6_3(
-        KC_TRNS, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_LABK, KC_LCBR, KC_LBRC, KC_LPRN, KC_EQL,  KC_BSPC,
+        KC_TRNS, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_LABK, KC_LCBR, KC_LBRC, KC_LPRN, KC_EQL,  KC_MINS,
         KC_TRNS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,      KC_RABK, KC_RCBR, KC_RBRC, KC_RPRN, KC_PIPE, KC_TRNS,
         KC_TRNS, KC_TILD, KC_GRV,  KC_DOT,  KC_COMM, KC_SLSH,      KC_PLUS, KC_COLN, KC_SCLN, KC_DQUO, KC_QUOT, KC_TRNS,
                                     KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS
@@ -547,7 +547,7 @@ static void render_scaled_char(uint8_t x, uint8_t y, char c, uint8_t scale) {
     const uint8_t *glyph = &font[(uint8_t)c * OLED_FONT_WIDTH];
     for (uint8_t col = 0; col < 5; col++) {
         uint8_t col_data = pgm_read_byte(&glyph[col]);
-        for (uint8_t row = 0; row < 7; row++) {
+        for (uint8_t row = 0; row < 8; row++) {
             bool on = (col_data >> row) & 1;
             for (uint8_t dx = 0; dx < scale; dx++)
                 for (uint8_t dy = 0; dy < scale; dy++)
@@ -604,11 +604,10 @@ bool oled_task_user(void) {
     render_icon_14x14(1, 34,  (mods & MOD_MASK_ALT)   ? icon_opt_filled   : icon_opt_small);
     render_icon_14x14(17, 34, (mods & MOD_MASK_GUI)   ? icon_cmd_filled   : icon_cmd_small);
 
-    // Large last key character (Y=52-72, 3x scaled = 15x21 at x=8)
+    // Large last key character (Y=52-75, 3x scaled = 15x24 at x=8)
+    clear_rect(8, 52, 15, 24);
     if (last_key_char) {
         render_scaled_char(8, 52, last_key_char, 3);
-    } else {
-        clear_rect(8, 52, 15, 21);
     }
 
     // Caps Word indicator (Y=80-87, text row 10)
