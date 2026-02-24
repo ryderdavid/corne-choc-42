@@ -4,8 +4,10 @@
 #pragma once
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 8
-#define TAPPING_TERM 220
+#define TAPPING_TERM 180
+#define TAPPING_TERM_PER_KEY
 #define QUICK_TAP_TERM 120        // Repeat key on fast double-tap instead of hold
+#define PERMISSIVE_HOLD           // Register hold earlier during fast rolls
 #define CHORDAL_HOLD              // Same-hand keys = tap, opposite-hand = hold
 
 #ifdef KEYBOARD_crkbd_rev1_legacy
