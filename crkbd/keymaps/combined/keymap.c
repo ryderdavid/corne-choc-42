@@ -295,7 +295,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NAV] = LAYOUT_split_3x6_3(
         KC_ESC,  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_NO,   KC_PGUP, KC_UP,   KC_PGDN, G(KC_EQL),  KC_BSPC,
-        KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, G(KC_MINS), KC_TRNS,
+        KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, G(KC_MINS), KC_ENT,
         KC_TRNS, CK_UNDO, CK_CUT,  CK_COPY, CK_PASTE, KC_NO,      KC_END,  MS_WHLD, KC_NO,   MS_WHLU, G(KC_0),    KC_NO,
                                     KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS
     ),
@@ -307,7 +307,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_SYMBOLS] = LAYOUT_split_3x6_3(
         KC_TRNS, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_LABK, KC_LCBR, KC_LBRC, KC_LPRN, KC_EQL,  KC_MINS,
         KC_TRNS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,      KC_RABK, KC_RCBR, KC_RBRC, KC_RPRN, KC_PIPE, KC_TRNS,
-        KC_TRNS, KC_TILD, KC_GRV,  KC_DOT,  KC_COMM, KC_SLSH,      KC_PLUS, KC_COLN, KC_SCLN, KC_DQUO, KC_QUOT, KC_TRNS,
+        KC_TRNS, KC_SCLN, KC_COMM, KC_DOT,  KC_SLSH, KC_QUOT,      KC_TRNS, KC_MINS, KC_UNDS, KC_EQL,  KC_PLUS, KC_TRNS,
                                     KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS
     ),
 
