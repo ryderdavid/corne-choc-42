@@ -346,7 +346,7 @@ static void render_scaled_char(uint8_t x, uint8_t y, char c, uint8_t scale) {
     const uint8_t *glyph = &font[(uint8_t)c * OLED_FONT_WIDTH];
     for (uint8_t col = 0; col < 5; col++) {
         uint8_t col_data = pgm_read_byte(&glyph[col]);
-        for (uint8_t row = 0; row < 7; row++) {
+        for (uint8_t row = 0; row < 8; row++) {
             bool on = (col_data >> row) & 1;
             for (uint8_t dx = 0; dx < scale; dx++)
                 for (uint8_t dy = 0; dy < scale; dy++)
@@ -387,10 +387,9 @@ bool oled_task_user(void) {
     render_icon_14x14(1, 34,  (mods & MOD_MASK_ALT)   ? icon_opt_filled   : icon_opt_small);
     render_icon_14x14(17, 34, (mods & MOD_MASK_GUI)   ? icon_cmd_filled   : icon_cmd_small);
 
+    clear_rect(8, 52, 15, 24);
     if (last_key_char) {
         render_scaled_char(8, 52, last_key_char, 3);
-    } else {
-        clear_rect(8, 52, 15, 21);
     }
 
     oled_set_cursor(0, 10);
