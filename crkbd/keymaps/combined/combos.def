@@ -143,7 +143,7 @@ combo_t key_combos[COMBO_COUNT] = {
     [CMB_DEL]       = COMBO(cmb_del, KC_DEL),
     [CMB_BSPC]      = COMBO(cmb_bspc, KC_BSPC),
     [CMB_HYPER_Z]   = COMBO(cmb_hyper_z, HYPR(KC_Z)),
-    [CMB_LAYOUT_TG] = COMBO(cmb_layout_tg, TG(_GALLIUM)),
+    [CMB_CYCLE]     = COMBO_ACTION(cmb_layout_tg),
     [CMB_NUM_TG]    = COMBO(cmb_num_tg, TG(_NUMBERS)),
 
     // QWERTY word chords

@@ -1,13 +1,15 @@
-// Corne Choc 42-Key — Combined Profile (QWERTY + Gallium)
-// macOS-optimized with SCAG home row mods + dual word chording + enhanced OLED
+// Corne Choc 42-Key — Combined Profile (QWERTY + Gallium × macOS + Windows)
+// All 4 layouts in one firmware, cycle with bottom-right 4-key combo
 //
 // Layers:
-//   0 = QWERTY base
-//   1 = Gallium v1 base (toggle via combo)
-//   2 = Numbers
-//   3 = Nav
-//   4 = Symbols
-//   5 = Numpad
+//   0 = QWERTY (macOS, SCAG home row mods)
+//   1 = Gallium v1 (macOS, SCAG home row mods)
+//   2 = QWERTY Windows (SGAC home row mods)
+//   3 = Gallium v1 Windows (SGAC home row mods)
+//   4 = Numbers
+//   5 = Nav
+//   6 = Symbols
+//   7 = F-Keys
 
 #include QMK_KEYBOARD_H
 #include <stdio.h>
@@ -17,39 +19,70 @@
 enum layers {
     _QWERTY,
     _GALLIUM,
+    _QWERTY_WIN,
+    _GALLIUM_WIN,
     _NUMBERS,
     _NAV,
     _SYMBOLS,
-    _NUMPAD,
+    _FKEYS,
 };
 
-// ─── Home Row Mods — SCAG (QWERTY positions, used on layer 0) ──────────────
+// ─── Custom Keycodes ────────────────────────────────────────────────────────
 
-// Left hand (QWERTY: A S D F)
+enum custom_keycodes {
+    CK_UNDO = SAFE_RANGE,
+    CK_CUT,
+    CK_COPY,
+    CK_PASTE,
+};
+
+// ─── QWERTY Home Row Mods — SCAG (macOS) ───────────────────────────────────
+
 #define HM_A    LSFT_T(KC_A)
 #define HM_S    LCTL_T(KC_S)
 #define HM_D    LALT_T(KC_D)
 #define HM_F    LGUI_T(KC_F)
 
-// Right hand (QWERTY: J K L ;)
 #define HM_J    RGUI_T(KC_J)
 #define HM_K    RALT_T(KC_K)
 #define HM_L    RCTL_T(KC_L)
 #define HM_SCLN RSFT_T(KC_SCLN)
 
-// ─── Gallium Home Row Mods (used on layer 1) ───────────────────────────────
+// ─── Gallium Home Row Mods — SCAG (macOS) ───────────────────────────────────
 
-// Left hand (Gallium: N R T S)
 #define GM_N    LSFT_T(KC_N)
 #define GM_R    LCTL_T(KC_R)
 #define GM_T    LALT_T(KC_T)
 #define GM_S    LGUI_T(KC_S)
 
-// Right hand (Gallium: H A E I)
 #define GM_H    RGUI_T(KC_H)
 #define GM_A    RALT_T(KC_A)
 #define GM_E    RCTL_T(KC_E)
 #define GM_I    RSFT_T(KC_I)
+
+// ─── QWERTY Home Row Mods — SGAC (Windows) ─────────────────────────────────
+
+#define WM_A    LSFT_T(KC_A)
+#define WM_S    LGUI_T(KC_S)
+#define WM_D    LALT_T(KC_D)
+#define WM_F    LCTL_T(KC_F)
+
+#define WM_J    RCTL_T(KC_J)
+#define WM_K    RALT_T(KC_K)
+#define WM_L    RGUI_T(KC_L)
+#define WM_SCLN RSFT_T(KC_SCLN)
+
+// ─── Gallium Home Row Mods — SGAC (Windows) ─────────────────────────────────
+
+#define GW_N    LSFT_T(KC_N)
+#define GW_R    LGUI_T(KC_R)
+#define GW_T    LALT_T(KC_T)
+#define GW_S    LCTL_T(KC_S)
+
+#define GW_H    RCTL_T(KC_H)
+#define GW_A    RALT_T(KC_A)
+#define GW_E    RGUI_T(KC_E)
+#define GW_I    RSFT_T(KC_I)
 
 // ─── Thumb Keys ─────────────────────────────────────────────────────────────
 
@@ -57,13 +90,14 @@ enum layers {
 #define NAV_SPC LT(_NAV, KC_SPC)
 #define SYM_BSP LT(_SYMBOLS, KC_BSPC)
 #define SYM_SPC LT(_SYMBOLS, KC_SPC)
+#define FK_ENT  LT(_FKEYS, KC_ENT)
 
 // ─── Tap Dance ──────────────────────────────────────────────────────────────
 
 enum tap_dances {
-    TD_SYM_LAYER,    // Tap=OSL(_SYMBOLS), Hold=MO(_SYMBOLS), Double=MO(_NUMBERS)
-    TD_SPC_SYM,      // Tap=Space, Hold=MO(_SYMBOLS)
-    TD_SHIFT_CAPS,   // Tap=Shift, Hold=Shift, Double-tap=CapsLock
+    TD_SYM_LAYER,
+    TD_SPC_SYM,
+    TD_SHIFT_CAPS,
 };
 
 #define TD_SYM  TD(TD_SYM_LAYER)
@@ -73,15 +107,15 @@ enum tap_dances {
 // ─── Combo Definitions ──────────────────────────────────────────────────────
 
 enum combo_events {
-    // Utility combos (always active — same physical keys for both layouts)
-    CMB_ESC,          // Tab+Q = Escape
-    CMB_DEL,          // F+D = Delete
-    CMB_BSPC,         // J+K = Backspace
-    CMB_HYPER_Z,      // Shift+Z = Hyper+Z
-    CMB_LAYOUT_TG,    // Bottom-right 4 keys = Toggle layout
-    CMB_NUM_TG,       // G+H = Toggle Numbers layer
+    // Utility combos
+    CMB_ESC,
+    CMB_DEL,
+    CMB_BSPC,
+    CMB_HYPER_Z,
+    CMB_CYCLE,        // Bottom-right 4 keys = Cycle layout
+    CMB_NUM_TG,
 
-    // QWERTY word chords (active on QWERTY layer)
+    // QWERTY word chords
     QWC_THE,  QWC_BE,   QWC_TO,   QWC_AND,  QWC_OF,
     QWC_IN,   QWC_HAVE, QWC_THAT, QWC_FOR,  QWC_NOT,
     QWC_WITH, QWC_YOU,  QWC_THIS, QWC_FROM, QWC_BUT,
@@ -93,8 +127,7 @@ enum combo_events {
     QWC_ABOUT,QWC_WHO,  QWC_GET,  QWC_MAKE, QWC_GO,
     QWC_LIKE, QWC_JUST, QWC_KNOW, QWC_TAKE, QWC_COME,
 
-    // Gallium word chords (active on Gallium layer)
-    // These use QWERTY keycodes at Gallium physical positions
+    // Gallium word chords
     GWC_THE,  GWC_BE,   GWC_TO,   GWC_AND,  GWC_OF,
     GWC_IN,   GWC_HAVE, GWC_THAT, GWC_FOR,  GWC_NOT,
     GWC_WITH, GWC_YOU,  GWC_THIS, GWC_FROM, GWC_BUT,
@@ -112,17 +145,17 @@ enum combo_events {
 // Include combo key arrays
 #include "combos.def"
 
-// Gate combos by active layer
+// Gate combos by active base layout
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
-    // Utility combos (CMB_ESC through CMB_LAYOUT_TG): always fire
     if (combo_index <= CMB_NUM_TG) return true;
-    // QWERTY word chords: fire when NOT on Gallium layer
+
+    uint8_t base = get_highest_layer(default_layer_state);
+
     if (combo_index >= QWC_THE && combo_index <= QWC_COME) {
-        return !layer_state_is(_GALLIUM);
+        return (base == _QWERTY || base == _QWERTY_WIN);
     }
-    // Gallium word chords: fire only on Gallium layer
     if (combo_index >= GWC_THE && combo_index <= GWC_COME) {
-        return layer_state_is(_GALLIUM);
+        return (base == _GALLIUM || base == _GALLIUM_WIN);
     }
     return true;
 }
@@ -130,7 +163,20 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
 void process_combo_event(uint16_t combo_index, bool pressed) {
     if (!pressed) return;
     switch (combo_index) {
-        // QWERTY word chords
+        case CMB_CYCLE: {
+            uint8_t base = get_highest_layer(default_layer_state);
+            uint8_t next;
+            switch (base) {
+                case _QWERTY:      next = _GALLIUM; break;
+                case _GALLIUM:     next = _QWERTY_WIN; break;
+                case _QWERTY_WIN:  next = _GALLIUM_WIN; break;
+                case _GALLIUM_WIN: next = _QWERTY; break;
+                default:           next = _QWERTY; break;
+            }
+            default_layer_set(1UL << next);
+            break;
+        }
+        // Word chords (shared between QWERTY and Gallium variants)
         case QWC_THE:   case GWC_THE:   SEND_STRING("the "); break;
         case QWC_BE:    case GWC_BE:    SEND_STRING("be "); break;
         case QWC_TO:    case GWC_TO:    SEND_STRING("to "); break;
@@ -189,62 +235,73 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // ┌──────────────────────────────────────────────────────────────────────┐
-    // │ Layer 0 — QWERTY with SCAG home row mods                            │
+    // │ Layer 0 — QWERTY macOS (SCAG home row mods)                         │
     // └──────────────────────────────────────────────────────────────────────┘
-    //
-    // ,--------------------------------------------.  ,--------------------------------------------.
-    // | Tab  |  Q   |  W   |  E   |  R   |  T     |  |  Y   |  U   |  I   |  O   |  P   | Bspc   |
-    // |------+------+------+------+------+---------|  |------+------+------+------+------+---------|
-    // |MO(3) |  A   |  S   |  D   |  F   | G/Num  |  |  H   |  J   |  K   |  L   |  ;   |TD(Qsym)|
-    // |      | Sft  | Ctl  | Opt  | Cmd  | LT(2)  |  |      | Cmd  | Opt  | Ctl  | Sft  |        |
-    // |------+------+------+------+------+---------|  |------+------+------+------+------+---------|
-    // | Sft  |  Z   |  X   |  C   |  V   |  B     |  |  N   |  M   |  ,   |  .   |  /   | Sft    |
-    // `------+------+------+------+------+---------'  `---------+------+------+------+------+------'
-    //                      | Cmd  |Nav/Bs|Num/En|      |Num/Sp|Nav/Sp|OSL(4)|
-    //                      `--------------------'      `--------------------'
 
     [_QWERTY] = LAYOUT_split_3x6_3(
         KC_TAB,     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
         MO(_NAV),   HM_A,    HM_S,    HM_D,    HM_F,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_H), HM_J, HM_K, HM_L, HM_SCLN, KC_QUOT,
         KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,              KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_SLSH),
-                                       KC_LGUI, SYM_BSP, NAV_ENT,           NAV_SPC, SYM_SPC, RGUI_T(KC_ENT)
+                                       KC_LGUI, SYM_BSP, NAV_ENT,           NAV_SPC, SYM_SPC, FK_ENT
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐
-    // │ Layer 1 — Gallium v1 (toggled via combo)                            │
+    // │ Layer 1 — Gallium v1 macOS (SCAG home row mods)                     │
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_GALLIUM] = LAYOUT_split_3x6_3(
-        KC_TRNS, KC_B,    KC_L,    KC_D,    KC_C,    KC_V,         KC_J,    KC_Y,    KC_O,    KC_U,    KC_COMM, KC_TRNS,
-        KC_TRNS, GM_N,    GM_R,    GM_T,    GM_S,    KC_TRNS,      KC_P,    GM_H,    GM_A,    GM_E,    GM_I,    LT(_NAV,KC_SCLN),
-        KC_TRNS, KC_Q,    KC_TRNS, KC_M,    KC_W,    KC_Z,         KC_K,    KC_F,    KC_QUOT, KC_SLSH, KC_DOT,  KC_TRNS,
-                                    KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS
+        KC_TAB,     KC_B,    KC_L,    KC_D,    KC_C,    KC_V,              KC_J,    KC_Y,    KC_O,    KC_U,    KC_COMM, KC_BSPC,
+        MO(_NAV),   GM_N,    GM_R,    GM_T,    GM_S,    LT(_NUMBERS,KC_G), KC_P,    GM_H,    GM_A,    GM_E,    GM_I,    LT(_NAV,KC_SCLN),
+        KC_LSFT,    KC_Q,    KC_X,    KC_M,    KC_W,    KC_Z,              KC_K,    KC_F,    KC_QUOT, KC_SLSH, KC_DOT,  RSFT_T(KC_SLSH),
+                                       KC_LGUI, SYM_BSP, NAV_ENT,           NAV_SPC, SYM_SPC, FK_ENT
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐
-    // │ Layer 2 — Numbers                                                   │
+    // │ Layer 2 — QWERTY Windows (SGAC home row mods)                       │
+    // └──────────────────────────────────────────────────────────────────────┘
+
+    [_QWERTY_WIN] = LAYOUT_split_3x6_3(
+        KC_TAB,     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+        MO(_NAV),   WM_A,    WM_S,    WM_D,    WM_F,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_H), WM_J, WM_K, WM_L, WM_SCLN, KC_QUOT,
+        KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,              KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_SLSH),
+                                       KC_LCTL, SYM_BSP, NAV_ENT,           NAV_SPC, SYM_SPC, FK_ENT
+    ),
+
+    // ┌──────────────────────────────────────────────────────────────────────┐
+    // │ Layer 3 — Gallium v1 Windows (SGAC home row mods)                   │
+    // └──────────────────────────────────────────────────────────────────────┘
+
+    [_GALLIUM_WIN] = LAYOUT_split_3x6_3(
+        KC_TAB,     KC_B,    KC_L,    KC_D,    KC_C,    KC_V,              KC_J,    KC_Y,    KC_O,    KC_U,    KC_COMM, KC_BSPC,
+        MO(_NAV),   GW_N,    GW_R,    GW_T,    GW_S,    LT(_NUMBERS,KC_G), KC_P,    GW_H,    GW_A,    GW_E,    GW_I,    LT(_NAV,KC_SCLN),
+        KC_LSFT,    KC_Q,    KC_X,    KC_M,    KC_W,    KC_Z,              KC_K,    KC_F,    KC_QUOT, KC_SLSH, KC_DOT,  RSFT_T(KC_SLSH),
+                                       KC_LCTL, SYM_BSP, NAV_ENT,           NAV_SPC, SYM_SPC, FK_ENT
+    ),
+
+    // ┌──────────────────────────────────────────────────────────────────────┐
+    // │ Layer 4 — Numbers                                                   │
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_NUMBERS] = LAYOUT_split_3x6_3(
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_ASTR, KC_7,    KC_8,    KC_9,    KC_TRNS, KC_TRNS,
         KC_NO,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,         KC_MINS, KC_4,    KC_5,    KC_6,    KC_TRNS, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,      KC_PLUS, KC_1,    KC_2,    KC_3,    KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_DOT,  KC_ASTR, KC_SLSH, KC_PLUS, KC_MINS,      KC_PLUS, KC_1,    KC_2,    KC_3,    KC_TRNS, KC_TRNS,
                                     KC_TRNS, KC_TRNS, KC_TRNS,      KC_ENT,  KC_0,    KC_DOT
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐
-    // │ Layer 3 — Navigation                                                │
+    // │ Layer 5 — Navigation (clipboard adapts to macOS/Windows)             │
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_NAV] = LAYOUT_split_3x6_3(
         KC_TRNS, G(S(KC_1)), G(S(KC_2)), G(S(KC_3)), G(S(KC_4)), G(S(KC_5)),  KC_NO,   KC_PGUP, KC_UP,   KC_PGDN, KC_NO,   KC_TRNS,
         KC_TRNS, G(S(KC_6)), G(S(KC_7)), G(S(KC_8)), G(S(KC_9)), G(S(KC_0)),  KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_NO,   KC_TRNS,
-        KC_TRNS, G(KC_Z), G(KC_X), G(KC_C), G(KC_V), KC_NO,        KC_END,  MS_WHLU, KC_NO,   MS_WHLD, KC_NO,   KC_NO,
+        KC_TRNS, CK_UNDO, CK_CUT,  CK_COPY, CK_PASTE, KC_NO,        KC_END,  MS_WHLU, KC_NO,   MS_WHLD, KC_NO,   KC_NO,
                                     KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐
-    // │ Layer 4 — Symbols                                                   │
+    // │ Layer 6 — Symbols                                                   │
     // └──────────────────────────────────────────────────────────────────────┘
 
     [_SYMBOLS] = LAYOUT_split_3x6_3(
@@ -255,14 +312,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐
-    // │ Layer 5 — Numpad (right side mirror of Numbers)                     │
+    // │ Layer 7 — F-Keys (held via right outer thumb)                       │
     // └──────────────────────────────────────────────────────────────────────┘
 
-    [_NUMPAD] = LAYOUT_split_3x6_3(
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,      KC_ASTR, KC_7,    KC_8,    KC_9,    KC_TRNS, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,      KC_MINS, KC_4,    KC_5,    KC_6,    KC_TRNS, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,      KC_PLUS, KC_1,    KC_2,    KC_3,    KC_TRNS, KC_TRNS,
-                                    KC_TRNS, KC_TRNS, KC_TRNS,      KC_ENT,  KC_0,    KC_DOT
+    [_FKEYS] = LAYOUT_split_3x6_3(
+        KC_TRNS, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_F11,  KC_F12,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                                    KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS
     ),
 };
 
@@ -329,7 +386,6 @@ tap_dance_action_t tap_dance_actions[] = {
 static char last_key_char = 0;
 
 static char keycode_to_char(uint16_t keycode, uint8_t mods) {
-    // Extract base keycode from mod-tap or layer-tap
     if (keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) {
         keycode = keycode & 0xFF;
     } else if (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX) {
@@ -355,8 +411,47 @@ static char keycode_to_char(uint16_t keycode, uint8_t mods) {
     return 0;
 }
 
+// ─── Mash Guard + Custom Keycodes ──────────────────────────────────────────
+
+static uint16_t mash_last_event_time = 0;
+static uint16_t mash_last_keycode    = KC_NO;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
+        // Mash guard: suppress accidental simultaneous keypresses
+        bool prev_is_special = (mash_last_keycode >= QK_MOD_TAP   && mash_last_keycode <= QK_MOD_TAP_MAX) ||
+                               (mash_last_keycode >= QK_LAYER_TAP && mash_last_keycode <= QK_LAYER_TAP_MAX);
+        bool curr_is_special = (keycode >= QK_MOD_TAP   && keycode <= QK_MOD_TAP_MAX) ||
+                               (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX);
+
+        if (!prev_is_special && !curr_is_special &&
+            TIMER_DIFF_16(record->event.time, mash_last_event_time) < MASH_GUARD_TERM) {
+            return false;
+        }
+
+        mash_last_event_time = record->event.time;
+        mash_last_keycode    = keycode;
+
+        // Platform-aware clipboard keycodes
+        uint8_t base = get_highest_layer(default_layer_state);
+        bool win_mode = (base == _QWERTY_WIN || base == _GALLIUM_WIN);
+
+        switch (keycode) {
+            case CK_UNDO:
+                tap_code16(win_mode ? C(KC_Z) : G(KC_Z));
+                return false;
+            case CK_CUT:
+                tap_code16(win_mode ? C(KC_X) : G(KC_X));
+                return false;
+            case CK_COPY:
+                tap_code16(win_mode ? C(KC_C) : G(KC_C));
+                return false;
+            case CK_PASTE:
+                tap_code16(win_mode ? C(KC_V) : G(KC_V));
+                return false;
+        }
+
+        // Last key tracking for OLED
         char c = keycode_to_char(keycode, get_mods());
         if (c) last_key_char = c;
     }
@@ -371,18 +466,10 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_270;
 }
 
-// Access the font array defined in the OLED driver via OLED_FONT_H
 extern const unsigned char font[] PROGMEM;
 
 // ─── Modifier Icon Bitmaps (14x14, row-major, 2 bytes/row in PROGMEM) ───────
-//
-// Encoding: bit 7 of byte 0 = leftmost pixel (x=0), bit 0 = pixel x=7
-//           bit 7 of byte 1 = pixel x=8, bit 2 = pixel x=13 (rightmost)
 
-// Full-size icons (14x14) shown when modifier is ACTIVE
-// Tiny icons (6x6 centered in 14x14) shown when INACTIVE
-//
-// Shift: upward chevron with stem and base bar
 static const uint8_t PROGMEM icon_shift_filled[] = {
     0x03,0x00, 0x07,0x80, 0x0F,0xC0, 0x1F,0xE0,
     0x3F,0xF0, 0x7F,0xF8, 0x03,0x00, 0x03,0x00,
@@ -395,8 +482,6 @@ static const uint8_t PROGMEM icon_shift_small[] = {
     0x03,0x00, 0x07,0x80, 0x00,0x00, 0x00,0x00,
     0x00,0x00, 0x00,0x00,
 };
-
-// Control: thick caret
 static const uint8_t PROGMEM icon_ctrl_filled[] = {
     0x07,0x80, 0x0C,0xC0, 0x18,0x60, 0x30,0x30,
     0x60,0x18, 0xC0,0x0C, 0x00,0x00, 0x00,0x00,
@@ -409,8 +494,6 @@ static const uint8_t PROGMEM icon_ctrl_small[] = {
     0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00,
     0x00,0x00, 0x00,0x00,
 };
-
-// Option: diagonal split path with horizontal bar
 static const uint8_t PROGMEM icon_opt_filled[] = {
     0x00,0x00, 0xC0,0x3C, 0x60,0x3C, 0x30,0x00,
     0x18,0x00, 0x0C,0x00, 0x06,0x00, 0x03,0x00,
@@ -423,8 +506,6 @@ static const uint8_t PROGMEM icon_opt_small[] = {
     0x00,0x80, 0x00,0x40, 0x00,0x00, 0x00,0x00,
     0x00,0x00, 0x00,0x00,
 };
-
-// Command: Bowen knot / looped square
 static const uint8_t PROGMEM icon_cmd_filled[] = {
     0x70,0xE0, 0x89,0x10, 0x89,0x10, 0x76,0xE0,
     0x16,0x80, 0x10,0x80, 0x76,0xE0, 0x89,0x10,
@@ -472,13 +553,25 @@ static void clear_rect(uint8_t x, uint8_t y, uint8_t w, uint8_t h) {
 
 static const char *get_layer_name(void) {
     switch (get_highest_layer(layer_state)) {
-        case _QWERTY:  return "Base";
-        case _GALLIUM: return "Base";
-        case _NUMBERS: return "Numbr";
-        case _NAV:     return "Nav";
-        case _SYMBOLS: return "Symbl";
-        case _NUMPAD:  return "NPad";
-        default:       return "?????";
+        case _QWERTY:
+        case _GALLIUM:
+        case _QWERTY_WIN:
+        case _GALLIUM_WIN: return "Base";
+        case _NUMBERS:     return "Numbr";
+        case _NAV:         return "Nav";
+        case _SYMBOLS:     return "Symbl";
+        case _FKEYS:       return "FKeys";
+        default:           return "?????";
+    }
+}
+
+static const char *get_layout_name(void) {
+    switch (get_highest_layer(default_layer_state)) {
+        case _QWERTY:      return "QWRTY";
+        case _GALLIUM:     return "GALLM";
+        case _QWERTY_WIN:  return "QWWIN";
+        case _GALLIUM_WIN: return "GLWIN";
+        default:           return "?????";
     }
 }
 
@@ -487,7 +580,7 @@ bool oled_task_user(void) {
 
     // Layout name (Y=0-7, text row 0)
     oled_set_cursor(0, 0);
-    oled_write_ln_P(layer_state_is(_GALLIUM) ? PSTR("GALLM") : PSTR("QWRTY"), false);
+    oled_write_ln(get_layout_name(), false);
 
     // Layer name (Y=8-15, text row 1)
     oled_set_cursor(0, 1);
