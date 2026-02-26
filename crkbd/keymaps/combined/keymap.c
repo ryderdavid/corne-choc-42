@@ -86,7 +86,6 @@ enum custom_keycodes {
 
 // ─── Thumb Keys ─────────────────────────────────────────────────────────────
 
-#define NAV_BSP LT(_NAV, KC_BSPC)
 #define NAV_SPC LT(_NAV, KC_SPC)
 #define SYM_ENT LT(_SYMBOLS, KC_ENT)
 #define SYM_SPC LT(_SYMBOLS, KC_SPC)
@@ -112,6 +111,8 @@ enum combo_events {
     CMB_DEL,
     CMB_BSPC,
     CMB_HYPER_Z,
+    CMB_NAV_BACK,     // Y+U = Cmd+[
+    CMB_NAV_FWD,      // P+Bksp = Cmd+]
     CMB_CYCLE,        // Bottom-right 4 keys = Cycle layout
     CMB_NUM_TG,
 
@@ -174,6 +175,18 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
                 default:           next = _QWERTY; break;
             }
             default_layer_set(1UL << next);
+            break;
+        }
+        case CMB_NAV_BACK: {
+            uint8_t base = get_highest_layer(default_layer_state);
+            bool win = (base == _QWERTY_WIN || base == _GALLIUM_WIN);
+            tap_code16(win ? LCTL(KC_LBRC) : LGUI(KC_LBRC));
+            break;
+        }
+        case CMB_NAV_FWD: {
+            uint8_t base = get_highest_layer(default_layer_state);
+            bool win = (base == _QWERTY_WIN || base == _GALLIUM_WIN);
+            tap_code16(win ? LCTL(KC_RBRC) : LGUI(KC_RBRC));
             break;
         }
         // Word chords (shared between QWERTY and Gallium variants)
@@ -240,9 +253,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTY] = LAYOUT_split_3x6_3(
         KC_GRV,          KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-        LT(_NAV,KC_TAB), HM_A,    HM_S,    HM_D,    HM_F,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_H), HM_J, HM_K, HM_L, HM_SCLN, KC_QUOT,
+        LT(_NAV,KC_TAB), HM_A,    HM_S,    HM_D,    HM_F,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_H), HM_J, HM_K, HM_L, HM_SCLN, LT(_SYMBOLS,KC_QUOT),
         KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,              KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_SLSH),
-                                       KC_LGUI, SYM_ENT, NAV_BSP,    NAV_SPC, SYM_SPC, FK_ENT
+                                       KC_LGUI, NAV_SPC, SYM_ENT,    SYM_SPC, NAV_SPC, FK_ENT
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐
@@ -251,9 +264,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_GALLIUM] = LAYOUT_split_3x6_3(
         KC_GRV,          KC_B,    KC_L,    KC_D,    KC_C,    KC_V,              KC_J,    KC_Y,    KC_O,    KC_U,    KC_MINS, KC_BSPC,
-        LT(_NAV,KC_TAB), GM_N,    GM_R,    GM_T,    GM_S,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_P), GM_H, GM_A, GM_E, GM_I, LT(_NAV,KC_SCLN),
+        LT(_NAV,KC_TAB), GM_N,    GM_R,    GM_T,    GM_S,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_P), GM_H, GM_A, GM_E, GM_I, LT(_SYMBOLS,KC_SCLN),
         KC_LSFT,          KC_Q,    KC_X,    KC_M,    KC_W,    KC_Z,              KC_K,    KC_F,    KC_COMM, KC_DOT,  KC_QUOT, RSFT_T(KC_SLSH),
-                                       KC_LGUI, SYM_ENT, NAV_BSP,    NAV_SPC, SYM_SPC, FK_ENT
+                                       KC_LGUI, NAV_SPC, SYM_ENT,    SYM_SPC, NAV_SPC, FK_ENT
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐
@@ -262,9 +275,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_QWERTY_WIN] = LAYOUT_split_3x6_3(
         KC_GRV,          KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-        LT(_NAV,KC_TAB), WM_A,    WM_S,    WM_D,    WM_F,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_H), WM_J, WM_K, WM_L, WM_SCLN, KC_QUOT,
+        LT(_NAV,KC_TAB), WM_A,    WM_S,    WM_D,    WM_F,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_H), WM_J, WM_K, WM_L, WM_SCLN, LT(_SYMBOLS,KC_QUOT),
         KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,              KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_SLSH),
-                                       KC_LCTL, SYM_ENT, NAV_BSP,    NAV_SPC, SYM_SPC, FK_ENT
+                                       KC_LCTL, NAV_SPC, SYM_ENT,    SYM_SPC, NAV_SPC, FK_ENT
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐
@@ -273,9 +286,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_GALLIUM_WIN] = LAYOUT_split_3x6_3(
         KC_GRV,          KC_B,    KC_L,    KC_D,    KC_C,    KC_V,              KC_J,    KC_Y,    KC_O,    KC_U,    KC_MINS, KC_BSPC,
-        LT(_NAV,KC_TAB), GW_N,    GW_R,    GW_T,    GW_S,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_P), GW_H, GW_A, GW_E, GW_I, LT(_NAV,KC_SCLN),
+        LT(_NAV,KC_TAB), GW_N,    GW_R,    GW_T,    GW_S,    LT(_NUMBERS,KC_G), LT(_NUMBERS,KC_P), GW_H, GW_A, GW_E, GW_I, LT(_SYMBOLS,KC_SCLN),
         KC_LSFT,          KC_Q,    KC_X,    KC_M,    KC_W,    KC_Z,              KC_K,    KC_F,    KC_COMM, KC_DOT,  KC_QUOT, RSFT_T(KC_SLSH),
-                                       KC_LCTL, SYM_ENT, NAV_BSP,    NAV_SPC, SYM_SPC, FK_ENT
+                                       KC_LCTL, NAV_SPC, SYM_ENT,    SYM_SPC, NAV_SPC, FK_ENT
     ),
 
     // ┌──────────────────────────────────────────────────────────────────────┐

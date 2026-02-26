@@ -49,6 +49,8 @@ enum combo_events {
     CMB_DEL,          // F+D = Delete
     CMB_BSPC,         // J+K = Backspace
     CMB_HYPER_Z,      // Shift+Z = Hyper+Z
+    CMB_NAV_BACK,     // Y+U = Cmd+[
+    CMB_NAV_FWD,      // P+Bksp = Cmd+]
 
     // Word chords (Space + letter keys)
     WC_THE,  WC_BE,   WC_TO,   WC_AND,  WC_OF,
@@ -146,7 +148,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_BASE] = LAYOUT_split_3x6_3(
         KC_GRV,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-        NV_TAB,  HM_A,    HM_S,    HM_D,    HM_F,    KC_G,         KC_H,    HM_J,    HM_K,    HM_L,    HM_SCLN, KC_QUOT,
+        NV_TAB,  HM_A,    HM_S,    HM_D,    HM_F,    KC_G,         KC_H,    HM_J,    HM_K,    HM_L,    HM_SCLN, LT(_SYMBOLS,KC_QUOT),
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                                     KC_LALT, KC_LGUI, LW_SPC,       RS_ENT,  KC_RGUI, FK_ENT
     ),

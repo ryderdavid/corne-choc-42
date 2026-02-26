@@ -8,6 +8,8 @@ const uint16_t PROGMEM cmb_esc[]     = {KC_GRV, KC_Q, COMBO_END};
 const uint16_t PROGMEM cmb_del[]     = {HM_F, HM_D, COMBO_END};
 const uint16_t PROGMEM cmb_bspc[]    = {HM_J, HM_K, COMBO_END};
 const uint16_t PROGMEM cmb_hyper_z[] = {KC_LSFT, KC_Z, COMBO_END};
+const uint16_t PROGMEM cmb_nav_back[] = {KC_Y, KC_U, COMBO_END};
+const uint16_t PROGMEM cmb_nav_fwd[]  = {KC_P, KC_BSPC, COMBO_END};
 
 // ─── Word Chords (Space + letter keys) ──────────────────────────────────────
 // Key references use QWERTY keycodes including mod-tap wrappers
@@ -71,6 +73,8 @@ combo_t key_combos[COMBO_COUNT] = {
     [CMB_DEL]     = COMBO(cmb_del, KC_DEL),
     [CMB_BSPC]    = COMBO(cmb_bspc, KC_BSPC),
     [CMB_HYPER_Z] = COMBO(cmb_hyper_z, HYPR(KC_Z)),
+    [CMB_NAV_BACK] = COMBO(cmb_nav_back, LGUI(KC_LBRC)),
+    [CMB_NAV_FWD]  = COMBO(cmb_nav_fwd, LGUI(KC_RBRC)),
 
     // Word chords
     [WC_THE]   = COMBO_ACTION(wc_the),
