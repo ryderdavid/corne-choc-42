@@ -1,7 +1,6 @@
 OLED_ENABLE         = yes
 OLED_DRIVER         = ssd1306
 COMBO_ENABLE        = yes
-TAP_DANCE_ENABLE    = yes
 MOUSEKEY_ENABLE     = yes
 EXTRAKEY_ENABLE     = yes
 

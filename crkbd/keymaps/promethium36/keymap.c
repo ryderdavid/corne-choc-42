@@ -15,37 +15,59 @@ enum custom_keycodes {
     KC_WHAT,
     KC_WHEN,
     KC_WHERE,
+    // Linger tap-holds (tap = first kc, hold = second kc). Release-fires semantics:
+    // on release within TAPPING_TERM -> tap; on release after -> hold. No wait after release.
+    LTH_G_Q,
+    LTH_M_Z,
+    LTH_J_LB,
+    LTH_SC_RB,
+    LTH_K_LP,
+    LTH_CM_RP,
+    LTH_X_LC,
+    LTH_MN_RC,
+    LTH_1,
+    LTH_2,
+    LTH_3,
+    LTH_4,
+    LTH_5,
+    LTH_6,
+    LTH_7,
+    LTH_8,
+    LTH_9,
+    LTH_0,
+    LTH_END,
 };
 
-enum tap_dances {
-    TD_V_Q = 0,
-    TD_W_Z,
-    TD_J_LBRC,
-    TD_SC_RBRC,
-    TD_K_LPRN,
-    TD_CM_RPRN,
-    TD_X_LCBR,
-    TD_MN_RCBR,
-    TD_1,
-    TD_2,
-    TD_3,
-    TD_4,
-    TD_5,
-    TD_6,
-    TD_7,
-    TD_8,
-    TD_9,
-    TD_0,
+#define LTH_FIRST LTH_G_Q
+#define LTH_COUNT (LTH_END - LTH_FIRST)
+
+typedef struct {
+    uint16_t tap;
+    uint16_t hold;
+} lth_t;
+
+static const lth_t lth_table[LTH_COUNT] = {
+    [LTH_G_Q    - LTH_FIRST] = { KC_G,    KC_Q    },
+    [LTH_M_Z    - LTH_FIRST] = { KC_M,    KC_Z    },
+    [LTH_J_LB   - LTH_FIRST] = { KC_J,    KC_LBRC },
+    [LTH_SC_RB  - LTH_FIRST] = { KC_SCLN, KC_RBRC },
+    [LTH_K_LP   - LTH_FIRST] = { KC_K,    KC_LPRN },
+    [LTH_CM_RP  - LTH_FIRST] = { KC_COMM, KC_RPRN },
+    [LTH_X_LC   - LTH_FIRST] = { KC_X,    KC_LCBR },
+    [LTH_MN_RC  - LTH_FIRST] = { KC_MINS, KC_RCBR },
+    [LTH_1      - LTH_FIRST] = { KC_1,    KC_EXLM },
+    [LTH_2      - LTH_FIRST] = { KC_2,    KC_AT   },
+    [LTH_3      - LTH_FIRST] = { KC_3,    KC_HASH },
+    [LTH_4      - LTH_FIRST] = { KC_4,    KC_DLR  },
+    [LTH_5      - LTH_FIRST] = { KC_5,    KC_PERC },
+    [LTH_6      - LTH_FIRST] = { KC_6,    KC_CIRC },
+    [LTH_7      - LTH_FIRST] = { KC_7,    KC_AMPR },
+    [LTH_8      - LTH_FIRST] = { KC_8,    KC_ASTR },
+    [LTH_9      - LTH_FIRST] = { KC_9,    KC_LPRN },
+    [LTH_0      - LTH_FIRST] = { KC_0,    KC_RPRN },
 };
 
-#define TH_V_Q   TD(TD_V_Q)
-#define TH_W_Z   TD(TD_W_Z)
-#define TH_J_LB  TD(TD_J_LBRC)
-#define TH_SC_RB TD(TD_SC_RBRC)
-#define TH_K_LP  TD(TD_K_LPRN)
-#define TH_CM_RP TD(TD_CM_RPRN)
-#define TH_X_LC  TD(TD_X_LCBR)
-#define TH_MN_RC TD(TD_MN_RCBR)
+static uint16_t lth_press_time[LTH_COUNT] = {0};
 
 // Hands Down Promethium home row mods (pinky->index)
 #define HDP_S_NAV LT(_NAV, KC_S)
@@ -59,6 +81,10 @@ enum tap_dances {
 #define HDP_F_SFT MT(MOD_LSFT, KC_F)
 #define HDP_B_SFT MT(MOD_RSFT, KC_B)
 
+// Num-layer activators also available on top-left V and top-right BSPC
+#define V_NUM    LT(_NUM, KC_V)
+#define BSPC_NUM LT(_NUM, KC_BSPC)
+
 // QWERTY home row mods (pinky->index)
 #define QW_A_NAV  LT(_NAV, KC_A)
 #define QW_S_CTL  MT(MOD_LCTL, KC_S)
@@ -71,14 +97,11 @@ enum tap_dances {
 #define QW_Z_SFT  MT(MOD_LSFT, KC_Z)
 #define QW_SL_SFT MT(MOD_RSFT, KC_SLSH)
 
-// Natural left-to-right ordering: first block of row args = physical LEFT,
-// second block = physical RIGHT. Each half reads outer-pinky -> index across
-// its block.
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_HDP] = LAYOUT_split_3x5_3(
-        TH_V_Q,    TH_W_Z,    KC_G,      KC_M,      TH_J_LB,        TH_SC_RB,  KC_DOT,    KC_QUOT,   KC_SLSH,   KC_BSPC,
-        HDP_S_NAV, HDP_N_CTL, HDP_T_ALT, HDP_H_GUI, TH_K_LP,        TH_CM_RP,  HDP_A_GUI, HDP_E_ALT, HDP_I_CTL, HDP_C_NAV,
-        HDP_F_SFT, KC_P,      KC_D,      KC_L,      TH_X_LC,        TH_MN_RC,  KC_U,      KC_O,      KC_Y,      HDP_B_SFT,
+        V_NUM,     KC_W,      LTH_G_Q,   LTH_M_Z,   LTH_J_LB,       LTH_SC_RB, KC_DOT,    KC_QUOT,   KC_SLSH,   BSPC_NUM,
+        HDP_S_NAV, HDP_N_CTL, HDP_T_ALT, HDP_H_GUI, LTH_K_LP,        LTH_CM_RP, HDP_A_GUI, HDP_E_ALT, HDP_I_CTL, HDP_C_NAV,
+        HDP_F_SFT, KC_P,      KC_D,      KC_L,      LTH_X_LC,        LTH_MN_RC, KC_U,      KC_O,      KC_Y,      HDP_B_SFT,
                                 KC_LGUI, LT(_NUM, KC_SPC), LT(_MOUSE, KC_R),       KC_SPC, LT(_NUM, KC_SPC), KC_SPC
     ),
 
@@ -104,10 +127,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_NUM] = LAYOUT_split_3x5_3(
-        TD(TD_1), TD(TD_2), TD(TD_3), TD(TD_4), TD(TD_5),     XXXXXXX, TD(TD_7), TD(TD_8), TD(TD_9), XXXXXXX,
-        TD(TD_6), TD(TD_7), TD(TD_8), TD(TD_9), TD(TD_0),     XXXXXXX, TD(TD_4), TD(TD_5), TD(TD_6), XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,      XXXXXXX, TD(TD_1), TD(TD_2), TD(TD_3), XXXXXXX,
-                                _______, _______, _______,    _______, TD(TD_0), KC_DOT
+        LTH_1,   LTH_2,   LTH_3,   LTH_4,   LTH_5,         XXXXXXX, LTH_7,   LTH_8,   LTH_9,   XXXXXXX,
+        LTH_6,   LTH_7,   LTH_8,   LTH_9,   LTH_0,         XXXXXXX, LTH_4,   LTH_5,   LTH_6,   XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       XXXXXXX, LTH_1,   LTH_2,   LTH_3,   XXXXXXX,
+                                _______, _______, _______,     _______, LTH_0,   KC_DOT
     ),
 
     [_MOUSE] = LAYOUT_split_3x5_3(
@@ -118,20 +141,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
-// Layout-switch combo: right bottom row 4 keys (U/O/Y/B on HDP, M/,/./ / on QWERTY)
+// Combos
 const uint16_t PROGMEM combo_hdp_toggle[]    = { KC_U, KC_O, KC_Y, HDP_B_SFT, COMBO_END };
 const uint16_t PROGMEM combo_qwerty_toggle[] = { KC_M, KC_COMM, KC_DOT, QW_SL_SFT, COMBO_END };
 const uint16_t PROGMEM combo_qwerty_bspc[]   = { KC_P, KC_O, COMBO_END };
-const uint16_t PROGMEM combo_hdp_esc[]       = { TH_V_Q, TH_W_Z, COMBO_END };
+const uint16_t PROGMEM combo_hdp_esc[]       = { V_NUM, KC_W, COMBO_END };
 const uint16_t PROGMEM combo_qwerty_esc[]    = { KC_Q, KC_W, COMBO_END };
 const uint16_t PROGMEM combo_hdp_tab[]       = { HDP_S_NAV, HDP_N_CTL, COMBO_END };
 const uint16_t PROGMEM combo_hdp_nt[]        = { HDP_N_CTL, HDP_T_ALT, COMBO_END };
-const uint16_t PROGMEM combo_hdp_what[]      = { TH_W_Z, HDP_H_GUI, HDP_A_GUI, COMBO_END };
-const uint16_t PROGMEM combo_hdp_when[]      = { TH_W_Z, HDP_H_GUI, HDP_E_ALT, COMBO_END };
-const uint16_t PROGMEM combo_hdp_where[]     = { TH_W_Z, HDP_H_GUI, KC_R,      COMBO_END };
+const uint16_t PROGMEM combo_hdp_what[]      = { KC_W, HDP_H_GUI, HDP_A_GUI, COMBO_END };
+const uint16_t PROGMEM combo_hdp_when[]      = { KC_W, HDP_H_GUI, HDP_E_ALT, COMBO_END };
+const uint16_t PROGMEM combo_hdp_where[]     = { KC_W, HDP_H_GUI, KC_R,      COMBO_END };
 const uint16_t PROGMEM combo_hdp_enter[]     = { KC_Y, HDP_B_SFT, COMBO_END };
-const uint16_t PROGMEM combo_hdp_equal[]     = { TH_MN_RC, KC_U, COMBO_END };
-const uint16_t PROGMEM combo_hdp_excl[]      = { TH_SC_RB, KC_DOT, COMBO_END };
+const uint16_t PROGMEM combo_hdp_equal[]     = { LTH_MN_RC, KC_U, COMBO_END };
+const uint16_t PROGMEM combo_hdp_excl[]      = { LTH_SC_RB, KC_DOT, COMBO_END };
 
 combo_t key_combos[] = {
     COMBO(combo_hdp_toggle, TG_BASE),
@@ -149,65 +172,23 @@ combo_t key_combos[] = {
     COMBO(combo_hdp_excl,  KC_EXLM),
 };
 
-// Tap dance: tap = first kc, hold = second kc (both are plain letters).
-typedef struct {
-    uint16_t tap;
-    uint16_t hold;
-    uint16_t held;
-} td_tap_hold_t;
-
-void td_tap_hold_finished(tap_dance_state_t *state, void *user_data) {
-    td_tap_hold_t *th = (td_tap_hold_t *)user_data;
-    if (state->pressed) {
-        if (state->count == 1 && !state->interrupted) {
-            register_code16(th->hold);
-            th->held = th->hold;
-        } else {
-            register_code16(th->tap);
-            th->held = th->tap;
-        }
-    } else {
-        register_code16(th->tap);
-        th->held = th->tap;
-    }
-}
-
-void td_tap_hold_reset(tap_dance_state_t *state, void *user_data) {
-    td_tap_hold_t *th = (td_tap_hold_t *)user_data;
-    wait_ms(10);
-    unregister_code16(th->held);
-    th->held = 0;
-}
-
-#define ACTION_TAP_DANCE_TAP_HOLD(tap_kc, hold_kc) \
-    { .fn = { NULL, td_tap_hold_finished, td_tap_hold_reset }, \
-      .user_data = (void *)&((td_tap_hold_t){ tap_kc, hold_kc, 0 }) }
-
-tap_dance_action_t tap_dance_actions[] = {
-    [TD_V_Q]     = ACTION_TAP_DANCE_TAP_HOLD(KC_V,    KC_Q),
-    [TD_W_Z]     = ACTION_TAP_DANCE_TAP_HOLD(KC_W,    KC_Z),
-    [TD_J_LBRC]  = ACTION_TAP_DANCE_TAP_HOLD(KC_J,    KC_LBRC),
-    [TD_SC_RBRC] = ACTION_TAP_DANCE_TAP_HOLD(KC_SCLN, KC_RBRC),
-    [TD_K_LPRN]  = ACTION_TAP_DANCE_TAP_HOLD(KC_K,    KC_LPRN),
-    [TD_CM_RPRN] = ACTION_TAP_DANCE_TAP_HOLD(KC_COMM, KC_RPRN),
-    [TD_X_LCBR]  = ACTION_TAP_DANCE_TAP_HOLD(KC_X,    KC_LCBR),
-    [TD_MN_RCBR] = ACTION_TAP_DANCE_TAP_HOLD(KC_MINS, KC_RCBR),
-    [TD_1] = ACTION_TAP_DANCE_TAP_HOLD(KC_1, KC_EXLM),
-    [TD_2] = ACTION_TAP_DANCE_TAP_HOLD(KC_2, KC_AT),
-    [TD_3] = ACTION_TAP_DANCE_TAP_HOLD(KC_3, KC_HASH),
-    [TD_4] = ACTION_TAP_DANCE_TAP_HOLD(KC_4, KC_DLR),
-    [TD_5] = ACTION_TAP_DANCE_TAP_HOLD(KC_5, KC_PERC),
-    [TD_6] = ACTION_TAP_DANCE_TAP_HOLD(KC_6, KC_CIRC),
-    [TD_7] = ACTION_TAP_DANCE_TAP_HOLD(KC_7, KC_AMPR),
-    [TD_8] = ACTION_TAP_DANCE_TAP_HOLD(KC_8, KC_ASTR),
-    [TD_9] = ACTION_TAP_DANCE_TAP_HOLD(KC_9, KC_LPRN),
-    [TD_0] = ACTION_TAP_DANCE_TAP_HOLD(KC_0, KC_RPRN),
-};
-
 // Magic H: last key tracking for HDP contextual completions.
 static uint16_t last_tap_kc = KC_NO;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // Custom linger tap-hold: tap on release < TAPPING_TERM, hold otherwise.
+    if (keycode >= LTH_FIRST && keycode < LTH_END) {
+        uint8_t idx = keycode - LTH_FIRST;
+        if (record->event.pressed) {
+            lth_press_time[idx] = record->event.time;
+        } else {
+            uint16_t elapsed = record->event.time - lth_press_time[idx];
+            tap_code16(elapsed < TAPPING_TERM ? lth_table[idx].tap : lth_table[idx].hold);
+            lth_press_time[idx] = 0;
+        }
+        return false;
+    }
+
     if (!record->event.pressed) return true;
     switch (keycode) {
         case TG_BASE: {
